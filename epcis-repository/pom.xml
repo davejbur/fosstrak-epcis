@@ -18,7 +18,15 @@
 
   <properties>
     <lib-cxf-version>2.2.9</lib-cxf-version>
-    <lib-spring-version>2.5.1</lib-spring-version>
+
+    <!-- original -->
+    <!-- lib-spring-version>2.5.1</lib-spring-version -->
+    <!-- works -->
+    <!-- spring-version>2.5.6</lib-spring-version -->
+    <!-- works -->
+    <lib-spring-version>3.2.18.RELEASE</lib-spring-version>
+    <!-- trying -->
+    <!-- lib-spring-version>4.3.14.RELEASE</lib-spring-version -->
     <!-- lib-spring-version>5.0.4.RELEASE</lib-spring-version -->
 
   </properties>
@@ -177,21 +185,21 @@
         <artifactId>slf4j-log4j12</artifactId>
         <version>1.7.25</version>
     </dependency>
-    <dependency>
+    <!-- dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <version>2.4</version>
-    </dependency>
+    </dependency -->
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-jaxws_2.1_spec</artifactId>
       <version>1.0</version>
     </dependency>
-    <dependency>
+    <!-- dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
       <version>2.1.1</version>
-    </dependency>
+    </dependency -->
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
