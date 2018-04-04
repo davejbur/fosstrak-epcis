@@ -47,7 +47,7 @@
   -->
 
   <!-- Hibernate session factory -->
-  <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+  <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
     <!-- all Hibernate properties are configured in hibernate.cfg.xml -->
     <property name="configLocation" value="classpath:hibernate.cfg.xml" />
   </bean>
