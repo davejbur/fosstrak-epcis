@@ -69,21 +69,26 @@
         <version>1.1</version>
     </dependency>
     <!-- Hibernate dependencies -->
-    <dependency>
+    <!-- dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate</artifactId>
       <version>3.2.5.ga</version>
-    </dependency>
-    <!-- dependency>
+    </dependency -->
+    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.2.15.Final</version>
+      <version>3.6.10.Final</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-ehcache</artifactId>
-      <version>5.2.15.Final</version>
-    </dependency -->
+      <version>3.6.10.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.22.0-GA</version>
+    </dependency> 
     <!-- Spring dependencies -->
     <dependency>
       <groupId>org.springframework</groupId>
