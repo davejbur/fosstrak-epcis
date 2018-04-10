@@ -20,6 +20,7 @@
 
 package org.fosstrak.epcis.repository.query;
 
+//import javax.jws.WebService;
 import org.fosstrak.epcis.model.ArrayOfString;
 import org.fosstrak.epcis.model.EmptyParms;
 import org.fosstrak.epcis.model.GetSubscriptionIDs;
@@ -54,6 +55,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author Marco Steybe
  */
+//@WebService(endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType" /*, portName="EPCISServicePortType", serviceName="QueryOperationsWebService"*/)
 public class QueryOperationsWebService implements EPCISServicePortType {
 
     private static final Log LOG = LogFactory.getLog(QueryOperationsWebService.class);

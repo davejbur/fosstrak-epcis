@@ -53,7 +53,7 @@ import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.configuration.security.AuthorizationPolicy;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.transport.http.ClientOnlyHTTPTransportFactory;
+import org.apache.cxf.transport.http.*;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.fosstrak.epcis.model.EmptyParms;
@@ -333,7 +333,10 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
     private void setUpBus() {
         Bus bus = CXFBusFactory.getDefaultBus();
         ClientOnlyHTTPTransportFactory httpTransport = new ClientOnlyHTTPTransportFactory();
+//        HTTPTransportFactory httpTransport = new HTTPTransportFactory();
         // httpTransport = new ServletTransportFactory();
+        
+        //FIX - setbus seems to have disappeared in CXF 3.0 with no documentation on where it's gone!
         httpTransport.setBus(bus);
         List<String> transportIds = Arrays.asList(new String[] {
                 "http://schemas.xmlsoap.org/wsdl/soap/http", "http://schemas.xmlsoap.org/soap/http",
@@ -341,6 +344,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
                 "http://cxf.apache.org/transports/http/configuration", "http://cxf.apache.org/bindings/xformat", });
         httpTransport.setTransportIds(transportIds);
         httpTransport.registerWithBindingManager();
+//        httpTransport.register();
         // httpTransport.register();
     }
 

@@ -17,7 +17,11 @@
   <name>epcis-queryclient</name>
 
   <properties>
+    <!-- original -->
     <lib-cxf-version>2.2.9</lib-cxf-version>
+    <!-- tried -->
+    <!-- lib-cxf-version>2.7.18</lib-cxf-version -->
+    <!-- lib-cxf-version>3.0.16</lib-cxf-version -->
   </properties>
 
 
@@ -153,6 +157,11 @@
       <version>${lib-cxf-version}</version>
     </dependency>
     <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-core</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-jaxws_2.1_spec</artifactId>
       <version>1.0</version>
@@ -171,11 +180,6 @@
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
       <version>1.1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-core</artifactId>
-      <version>${lib-cxf-version}</version>
     </dependency>
   </dependencies>
 

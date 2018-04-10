@@ -21,7 +21,7 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
     <property name="hibernate.cache.use_query_cache">false</property>
     <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
     <property name="hibernate.cache.use_structured_entries">true</property>
-    <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+    <!-- property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property -->
     <property name="hibernate.jdbc.use_get_generated_keys">true</property>
     <property name="hibernate.generate_statistics">true</property>
     <property name="hibernate.order_inserts">true</property>

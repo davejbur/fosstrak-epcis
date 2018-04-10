@@ -8,7 +8,7 @@ import java.sql.Types;
 import java.util.Properties;
 
 import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SessionImplementor;
+//import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.EnhancedUserType;
 import org.hibernate.usertype.ParameterizedType;
 
@@ -92,7 +92,7 @@ public class EnumUserType implements EnhancedUserType, ParameterizedType {
     public String toXMLString(Object value) {
         return ((Enum) value).name();
     }
-
+/*
   @Override
   public Object nullSafeGet(ResultSet rs, String[] strings, SessionImplementor si, Object o) throws HibernateException, SQLException
   {
@@ -104,5 +104,5 @@ public class EnumUserType implements EnhancedUserType, ParameterizedType {
   {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
-
+*/
 }

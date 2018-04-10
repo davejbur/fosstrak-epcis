@@ -5,11 +5,12 @@
     <src>images/banner_left.gif</src>
     <href>http://www.fosstrak.org/</href>
   </bannerLeft>
-  <skin>
+  <!-- the mavenskin this seems to have been lost in the migration -->
+  <!-- skin>
     <groupId>org.fosstrak.mavenskin</groupId>
     <artifactId>mavenskin-default</artifactId>
     <version>1.0</version>
-  </skin>
+  </skin -->
   <poweredBy>
     <logo img="images/logos/supportedByAutoid4.png" name="Auto-ID" href="http://www.autoidlabs.org/" />
   </poweredBy>

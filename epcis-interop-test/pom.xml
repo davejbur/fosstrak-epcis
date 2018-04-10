@@ -53,33 +53,33 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>[3.8,4)</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>xmlunit</groupId>
       <artifactId>xmlunit</artifactId>
-      <version>1.1</version>
+      <version>1.6</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.dbunit</groupId>
       <artifactId>dbunit</artifactId>
-      <version>2.4.7</version>
+      <version>2.5.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <!-- required by dbunit for using commons-logging -->
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-jcl</artifactId>
-      <version>1.5.6</version>
+      <version>1.7.25</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <!-- required by dbunit to access the db -->
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.13</version>
+      <version>5.1.46</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -94,6 +94,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.21.0</version>
         <configuration>
           <!-- by default, exclude all tests (see note above) -->
           <excludes>
@@ -114,7 +115,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.1</version>
+        <version>2.9</version>
         <reportSets>
           <reportSet>
             <reports>

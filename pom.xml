@@ -315,6 +315,10 @@
                     <matchString>FIXME</matchString>
                     <matchType>exact</matchType>
                   </tag>
+                  <tag>
+                    <matchString>fix</matchString>
+                    <matchType>ignoreCase</matchType>
+                  </tag>
                 </tags>
               </tagClass>
             </tagClasses>

@@ -15,21 +15,23 @@ import org.w3c.dom.Element;
 /**
  * <p>
  * Java class for AggregationEventExtensionType complex type.
+ * </p>
  * <p>
  * The following schema fragment specifies the expected content contained within
  * this class.
+ * </p>
  * 
  * <pre>
- * &lt;complexType name="AggregationEventExtensionType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;any processContents='lax' namespace='' maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;anyAttribute processContents='lax'/>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="AggregationEventExtensionType"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;any processContents='lax' namespace='' maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;anyAttribute processContents='lax'/&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
