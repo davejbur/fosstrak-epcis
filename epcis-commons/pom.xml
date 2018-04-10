@@ -73,8 +73,12 @@
             <!-- works -->
             <!-- version>2.2.9</version -->
             <!-- works -->
-            <version>2.2.9</version>
-            <!-- tried -->
+            <version>2.2.12</version>
+            <!-- doesn't work -->
+            <!-- version>2.3.0</version -->
+            <!-- doesn't work -->
+            <!-- version>2.3.11</version -->
+            <!-- doesn't work -->
             <!-- version>3.0.16</version -->
             <configuration>
               <wsdlOptions>

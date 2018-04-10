@@ -149,7 +149,11 @@
           <configuration>
             <source>1.8</source>
             <target>1.8</target>
-            <compilerArgument>-Xlint:deprecation</compilerArgument>
+            <showDeprecation>true</showDeprecation>
+            <showWarnings>true</showWarnings>
+            <compilerArgs>
+              <arg>-Xlint:deprecation</arg>
+            </compilerArgs>
           </configuration>
         </plugin>
         <plugin>
