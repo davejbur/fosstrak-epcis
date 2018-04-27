@@ -5,7 +5,7 @@
   can be omitted on non-Windows systems.
  -->
  <!-- Netbeans refuses to compile this if path attribute is missing, but it's only actually required if setting it to something different to what's below! -->
-<Context reloadable="true" antiResourceLocking="true" path="/epcis-repository-0.6.0-SNAPSHOT">
+<Context reloadable="true" antiResourceLocking="true" path="/epcis-repository-0.5.2-SNAPSHOT">
 
   <!--
      Parameters defined here are 'initial parameters' which are loaded at
