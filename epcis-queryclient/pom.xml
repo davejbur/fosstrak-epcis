@@ -18,7 +18,7 @@
 
   <properties>
     <!-- original -->
-    <lib-cxf-version>2.2.9</lib-cxf-version>
+    <lib-cxf-version>2.2.12</lib-cxf-version>
     <!-- tried -->
     <!-- lib-cxf-version>2.7.18</lib-cxf-version -->
     <!-- lib-cxf-version>3.0.16</lib-cxf-version -->

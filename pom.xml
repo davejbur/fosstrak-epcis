@@ -182,15 +182,24 @@
   </scm>
   <distributionManagement>
     <repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
       <id>fosstrak-repository</id>
       <name>Fosstrak repository</name>
-      <url>sftp://maven-repository.fosstrak.org/local/home/fosstrakrep/public_html/releases</url>
+      <url>https://oss.sonatype.org/content/repositories/public/</url>
+      <layout>default</layout>
     </repository>
-    <snapshotRepository>
+    <!--<snapshotRepository>
       <id>fosstrak-repository</id>
       <name>Fosstrak repository</name>
       <url>sftp://maven-repository.fosstrak.org/local/home/fosstrakrep/public_html/snapshots</url>
-    </snapshotRepository>
+    </snapshotRepository>-->
     <site>
       <id>fosstrak-website</id>
       <name>Fosstrak website</name>
@@ -376,9 +385,10 @@
       <id>steybem</id>
       <name>Marco Steybe</name>
       <email>-</email>
-      <organization>Zuehlke Engineering</organization>
+      <organization>-</organization>
       <roles>
         <role>project lead</role>
+        <role>developer</role>
       </roles>
     </developer>
     <developer>
