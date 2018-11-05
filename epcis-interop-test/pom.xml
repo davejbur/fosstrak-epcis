@@ -14,11 +14,11 @@
 
   <groupId>org.fosstrak.epcis</groupId>
   <artifactId>epcis-interop-test</artifactId>
-  <version>0.5.2-SNAPSHOT</version>
+  <version>0.5.3-SNAPSHOT</version>
   <parent>
     <artifactId>epcis</artifactId>
     <groupId>org.fosstrak.epcis</groupId>
-    <version>0.5.2-SNAPSHOT</version>
+    <version>0.5.3-SNAPSHOT</version>
   </parent>
   <packaging>jar</packaging>
   <modelVersion>4.0.0</modelVersion>
@@ -50,10 +50,22 @@
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
+    <!-- dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
+      <scope>test</scope>
+    </dependency -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.3.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.3.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -79,7 +91,7 @@
       <!-- required by dbunit to access the db -->
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.46</version>
+      <version>8.0.13</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -94,7 +106,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.21.0</version>
+        <version>2.22.1</version>
         <configuration>
           <!-- by default, exclude all tests (see note above) -->
           <excludes>
@@ -115,7 +127,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.9</version>
+        <version>3.0.0</version>
         <reportSets>
           <reportSet>
             <reports>

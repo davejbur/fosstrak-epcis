@@ -6,11 +6,11 @@
 
   <groupId>org.fosstrak.epcis</groupId>
   <artifactId>epcis-queryclient</artifactId>
-  <version>0.5.2-SNAPSHOT</version>
+  <version>0.5.3-SNAPSHOT</version>
   <parent>
     <artifactId>epcis</artifactId>
     <groupId>org.fosstrak.epcis</groupId>
-    <version>0.5.2-SNAPSHOT</version>
+    <version>0.5.3-SNAPSHOT</version>
   </parent>
   <packaging>jar</packaging>
   <modelVersion>4.0.0</modelVersion>
@@ -37,8 +37,8 @@
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.4</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
     <!-- CXF dependencies - only minimal set of transitive dependencies included -->
@@ -166,11 +166,11 @@
       <artifactId>geronimo-jaxws_2.1_spec</artifactId>
       <version>1.0</version>
     </dependency>
-    <dependency>
+    <!-- dependency>
       <groupId>javax.xml.bind</groupId>
       <artifactId>jaxb-api</artifactId>
       <version>2.2</version>
-    </dependency>
+    </dependency -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-frontend-simple</artifactId>
@@ -179,7 +179,7 @@
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
-      <version>1.1.2</version>
+      <version>1.1.3</version>
     </dependency>
   </dependencies>
 
@@ -199,7 +199,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.0.2</version>
+        <version>3.1.0</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -240,7 +240,7 @@
         -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>webstart-maven-plugin</artifactId>
-        <version>1.0-beta-7</version>
+        <version>1.0-beta-8-SNAPSHOT</version>
         <executions>
           <execution>
             <phase>deploy</phase>
@@ -317,7 +317,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.1</version>
+        <version>3.0.0</version>
         <reportSets>
           <reportSet>
             <reports>

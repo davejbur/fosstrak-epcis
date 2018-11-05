@@ -7,6 +7,7 @@ import java.io.InputStream;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ReadListener;
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
@@ -33,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
  * contentType <code>multipart/form-data</code> instead of the specified
  * <code>text/xml</code> and this filter takes care of appropriately handling
  * the request before it reaches the capture interface.
- * 
+ *
  * @author Marco Steybe
  */
 public class MultipartFormDataFilter implements Filter {
@@ -43,7 +44,7 @@ public class MultipartFormDataFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         // nothing to do
     }
-    
+
     public void destroy() {
         // nothing to do
     }
@@ -82,7 +83,7 @@ public class MultipartFormDataFilter implements Filter {
                     @Override
                     public ServletInputStream getInputStream() throws IOException {
                        return new WrappedServletInputStream(xml);
-                    } 
+                    }
                  };
                 chain.doFilter(req, resp);
             }
@@ -112,5 +113,23 @@ public class MultipartFormDataFilter implements Filter {
         public synchronized void reset() throws IOException {
             throw new IOException("reset not supported");
         }
+
+    @Override
+    public boolean isFinished()
+    {
+      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean isReady()
+    {
+      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setReadListener(ReadListener rl)
+    {
+      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     }
 }

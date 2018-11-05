@@ -23,20 +23,20 @@ package org.fosstrak.epcis.repository.query;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import junit.framework.TestCase;
-
 import org.fosstrak.epcis.model.ImplementationException;
 import org.fosstrak.epcis.model.QuerySchedule;
 import org.fosstrak.epcis.model.SubscriptionControlsException;
 import org.fosstrak.epcis.soap.ImplementationExceptionResponse;
 import org.fosstrak.epcis.soap.SubscriptionControlsExceptionResponse;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 
 /**
  * Tests for class Schedule.
- * 
+ *
  * @author Arthur van Dorp
  */
-public class ScheduleTest extends TestCase {
+public class ScheduleTest {
 
     static {
         // provide the catalina.base property which is not available when the
@@ -48,12 +48,13 @@ public class ScheduleTest extends TestCase {
 
     /**
      * Test for next scheduled year.
-     * 
+     *
      * @throws ImplementationException
      *             If an error in the implementation occurred.
      * @throws SubscriptionControlsException
      *             If an error in the schedule occurred.
      */
+    @Test
     public void testNextScheduledYear() throws ImplementationExceptionResponse, SubscriptionControlsExceptionResponse {
         // scheduled time is 1.1. 01:00.00
         QuerySchedule qs = new QuerySchedule();
@@ -77,12 +78,13 @@ public class ScheduleTest extends TestCase {
 
     /**
      * Test for next scheduled half hour.
-     * 
+     *
      * @throws ImplementationException
      *             If an error in the implementation occurred.
      * @throws SubscriptionControlsException
      *             If an error in the schedule occurred.
      */
+    @Test
     public void testNextScheduledHalfHour() throws ImplementationExceptionResponse,
             SubscriptionControlsExceptionResponse {
         // scheduled time is every half an hour
@@ -116,12 +118,13 @@ public class ScheduleTest extends TestCase {
 
     /**
      * Test for next scheduled day of the week.
-     * 
+     *
      * @throws ImplementationException
      *             If an error in the implementation occurred.
      * @throws SubscriptionControlsException
      *             If an error in the schedule occurred.
      */
+    @Test
     public void testNextScheduledDayOfWeek() throws ImplementationExceptionResponse,
             SubscriptionControlsExceptionResponse {
         // scheduled time is every July, at a Thursday, 17:15.59
@@ -147,12 +150,13 @@ public class ScheduleTest extends TestCase {
 
     /**
      * Test for next scheduled leap year (Schaltjahr).
-     * 
+     *
      * @throws ImplementationException
      *             If an error in the implementation occurred.
      * @throws SubscriptionControlsException
      *             If an error in the schedule occurred.
      */
+    @Test
     public void testNextScheduledLeapYear() throws ImplementationExceptionResponse,
             SubscriptionControlsExceptionResponse {
         // scheduled time is 29.2. 23:00.00 -> must be a leap year
@@ -177,12 +181,13 @@ public class ScheduleTest extends TestCase {
 
     /**
      * Test for next scheduled minute (used in the query tests!).
-     * 
+     *
      * @throws ImplementationException
      *             If an error in the implementation occurred.
      * @throws SubscriptionControlsException
      *             If an error in the schedule occurred.
      */
+    @Test
     public void testNextScheduledMinute() throws ImplementationExceptionResponse, SubscriptionControlsExceptionResponse {
         // scheduled time is always at top of a minute
         QuerySchedule qs = new QuerySchedule();
@@ -202,12 +207,13 @@ public class ScheduleTest extends TestCase {
 
     /**
      * Test for a complex next scheduled time.
-     * 
+     *
      * @throws ImplementationException
      *             If an error in the implementation occurred.
      * @throws SubscriptionControlsException
      *             If an error in the schedule occurred.
      */
+    @Test
     public void testComplexNextScheduledTime() throws ImplementationExceptionResponse,
             SubscriptionControlsExceptionResponse {
         // scheduled time is 1., 10., 20., or 30. of a month,
@@ -266,12 +272,13 @@ public class ScheduleTest extends TestCase {
 
     /**
      * Test for another complex next scheduled time.
-     * 
+     *
      * @throws ImplementationException
      *             If an error in the implementation occurred.
      * @throws SubscriptionControlsException
      *             If an error in the schedule occurred.
      */
+    @Test
     public void testLeapYearDayOfWeekNextScheduledTime() throws ImplementationExceptionResponse,
             SubscriptionControlsExceptionResponse {
 
@@ -294,6 +301,7 @@ public class ScheduleTest extends TestCase {
      * Test whether constructor throws an exception in case of an invalid
      * QuerySchedule.
      */
+    @Test
     public void testInvalidQuerySchedule() {
 
         QuerySchedule qsImpossibleSchedule = new QuerySchedule();

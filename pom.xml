@@ -7,7 +7,7 @@
 
   <groupId>org.fosstrak.epcis</groupId>
   <artifactId>epcis</artifactId>
-  <version>0.5.2-SNAPSHOT</version>
+  <version>0.5.3-SNAPSHOT</version>
   <packaging>pom</packaging> <!-- aggregator projects require 'pom' as packaging -->
   <modelVersion>4.0.0</modelVersion>
 
@@ -34,34 +34,433 @@
   <!-- Profiles                                                    -->
   <!-- =========================================================== -->
 
+  <!-- google error prone has problems with JDK8. codehaus one has problems with JDK11! -->
   <profiles>
+    <!-- dev, jdk8 -->
     <profile>
       <!-- in order to trigger this profile, specify "-Denv=test" on command line -->
-      <id>env-dev</id>
+      <id>env-dev-java8</id>
       <activation>
         <property>
           <name>env</name>
           <value>dev</value>
         </property>
+        <jdk>1.8</jdk>
       </activation>
       <properties>
         <!-- this file must be available from the child poms, therefore include a ".." -->
         <filter.file>../src/main/filters/dev.properties</filter.file>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- maven.compiler.release>1.8</maven.compiler.release -->
       </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+            <configuration>
+              <compilerId>javac-with-errorprone</compilerId>
+              <forceJavacCompilerUse>true</forceJavacCompilerUse>
+              <showWarnings>true</showWarnings>
+              <compilerArgs>
+                <arg>-XepAllErrorsAsWarnings</arg>
+              </compilerArgs>
+              <source>${maven.compiler.source}</source>
+              <target>${maven.compiler.target}</target>
+              <!-- release>${maven.compiler.release}</release -->
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-compiler-javac-errorprone</artifactId>
+                <version>2.8.5</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <execution>
+                <id>analyze</id>
+                <goals>
+                  <goal>analyze-only</goal>
+                </goals>
+                <configuration>
+                  <failOnWarning>false</failOnWarning>
+                  <outputXML>true</outputXML>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-dependencies</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
+    <!-- dev, jdk11 -->
     <profile>
-      <!-- this profile is activated by default -->
-      <id>env-prod</id>
+      <!-- in order to trigger this profile, specify "-Denv=test" on command line -->
+      <id>env-dev-java11</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>dev</value>
+        </property>
+        <jdk>11</jdk>
+      </activation>
+      <properties>
+        <!-- this file must be available from the child poms, therefore include a ".." -->
+        <filter.file>../src/main/filters/dev.properties</filter.file>
+        <!-- maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target -->
+        <maven.compiler.release>11</maven.compiler.release>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+            <configuration>
+              <showWarnings>true</showWarnings>
+              <compilerArgs>
+                <arg>-XDcompilePolicy=simple</arg>
+                <arg>-Xplugin:ErrorProne</arg>
+              </compilerArgs>
+              <!-- source>${maven.compiler.source}</source>
+              <target>${maven.compiler.target}</target -->
+              <release>${maven.compiler.release}</release>
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>com.google.errorprone</groupId>
+                  <artifactId>error_prone_core</artifactId>
+                  <version>2.3.2</version>
+                </path>
+              </annotationProcessorPaths>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <!-- doesn't work with JDK11 - needs plugin needs to be beuilt with ASM7 -->
+              <!-- execution>
+                <id>analyze</id>
+                <goals>
+                  <goal>analyze-only</goal>
+                </goals>
+                <configuration>
+                  <failOnWarning>false</failOnWarning>
+                  <outputXML>true</outputXML>
+                </configuration>
+              </execution -->
+              <execution>
+                <id>copy-dependencies</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- prod, jdk8 -->
+    <profile>
+      <id>env-prod-java8</id>
       <activation>
         <property>
           <name>env</name>
           <value>prod</value>
         </property>
+        <jdk>1.8</jdk>
+      </activation>
+      <properties>
+        <filter.file>../src/main/filters/prod.properties</filter.file>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- maven.compiler.release>1.8</maven.compiler.release -->
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+            <configuration>
+              <compilerId>javac-with-errorprone</compilerId>
+              <forceJavacCompilerUse>true</forceJavacCompilerUse>
+              <showWarnings>true</showWarnings>
+              <compilerArgs>
+                <arg>-XepAllErrorsAsWarnings</arg>
+              </compilerArgs>
+              <source>${maven.compiler.source}</source>
+              <target>${maven.compiler.target}</target>
+              <!-- release>${maven.compiler.release}</release -->
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-compiler-javac-errorprone</artifactId>
+                <version>2.8.5</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <execution>
+                <id>analyze</id>
+                <goals>
+                  <goal>analyze-only</goal>
+                </goals>
+                <configuration>
+                  <failOnWarning>false</failOnWarning>
+                  <outputXML>true</outputXML>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-dependencies</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- prod, jdk11 -->
+    <profile>
+      <!-- this profile is activated by default -->
+      <id>env-prod-java11</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>prod</value>
+        </property>
+        <jdk>11</jdk>
+        <!-- activeByDefault>true</activeByDefault -->
+      </activation>
+      <properties>
+        <filter.file>../src/main/filters/prod.properties</filter.file>
+        <!-- maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target -->
+        <maven.compiler.release>11</maven.compiler.release>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+            <configuration>
+              <showWarnings>true</showWarnings>
+              <compilerArgs>
+                <arg>-XDcompilePolicy=simple</arg>
+                <arg>-Xplugin:ErrorProne</arg>
+              </compilerArgs>
+              <!-- source>${maven.compiler.source}</source>
+              <target>${maven.compiler.target}</target -->
+              <release>${maven.compiler.release}</release>
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>com.google.errorprone</groupId>
+                  <artifactId>error_prone_core</artifactId>
+                  <version>2.3.2</version>
+                </path>
+              </annotationProcessorPaths>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <!-- doesn't work with JDK11 - needs plugin needs to be beuilt with ASM7 -->
+              <!-- execution>
+                <id>analyze</id>
+                <goals>
+                  <goal>analyze-only</goal>
+                </goals>
+                <configuration>
+                  <failOnWarning>false</failOnWarning>
+                  <outputXML>true</outputXML>
+                </configuration>
+              </execution -->
+              <execution>
+                <id>copy-dependencies</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- missing (i.e. default to prod), jdk8 -->
+    <profile>
+      <id>env-missing-java8</id>
+      <activation>
+        <property>
+          <name>!env</name>
+        </property>
+        <jdk>1.8</jdk>
+      </activation>
+      <properties>
+        <filter.file>../src/main/filters/prod.properties</filter.file>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- maven.compiler.release>1.8</maven.compiler.release -->
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+            <configuration>
+              <compilerId>javac-with-errorprone</compilerId>
+              <forceJavacCompilerUse>true</forceJavacCompilerUse>
+              <showWarnings>true</showWarnings>
+              <compilerArgs>
+                <arg>-XepAllErrorsAsWarnings</arg>
+              </compilerArgs>
+              <source>${maven.compiler.source}</source>
+              <target>${maven.compiler.target}</target>
+              <!-- release>${maven.compiler.release}</release -->
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-compiler-javac-errorprone</artifactId>
+                <version>2.8.5</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <execution>
+                <id>analyze</id>
+                <goals>
+                  <goal>analyze-only</goal>
+                </goals>
+                <configuration>
+                  <failOnWarning>false</failOnWarning>
+                  <outputXML>true</outputXML>
+                </configuration>
+              </execution>
+              <execution>
+                <id>copy-dependencies</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- missing (i.e. default to prod), jdk11 -->
+    <profile>
+      <!-- this profile is activated by default -->
+      <id>env-missing-java11</id>
+      <activation>
+        <property>
+          <name>!env</name>
+        </property>
+        <jdk>11</jdk>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
         <filter.file>../src/main/filters/prod.properties</filter.file>
+        <!-- maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target -->
+        <maven.compiler.release>11</maven.compiler.release>
       </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+            <configuration>
+              <showWarnings>true</showWarnings>
+              <compilerArgs>
+                <arg>-XDcompilePolicy=simple</arg>
+                <arg>-Xplugin:ErrorProne</arg>
+              </compilerArgs>
+              <!-- source>${maven.compiler.source}</source>
+              <target>${maven.compiler.target}</target -->
+              <release>${maven.compiler.release}</release>
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>com.google.errorprone</groupId>
+                  <artifactId>error_prone_core</artifactId>
+                  <version>2.3.2</version>
+                </path>
+              </annotationProcessorPaths>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+              <!-- doesn't work with JDK11 - needs plugin needs to be beuilt with ASM7 -->
+              <!-- execution>
+                <id>analyze</id>
+                <goals>
+                  <goal>analyze-only</goal>
+                </goals>
+                <configuration>
+                  <failOnWarning>false</failOnWarning>
+                  <outputXML>true</outputXML>
+                </configuration>
+              </execution -->
+              <execution>
+                <id>copy-dependencies</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
@@ -84,6 +483,29 @@
       <filter>${filter.file}</filter>
     </filters>
     <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.0</version>
+            <configuration>
+              <compilerId>javac-with-errorprone</compilerId>
+              <forceJavacCompilerUse>true</forceJavacCompilerUse>
+              <showWarnings>true</showWarnings>
+              <compilerArgs>
+                <arg>-XepAllErrorsAsWarnings</arg>
+              </compilerArgs>
+              <source>${maven.compiler.source}</source>
+              <target>${maven.compiler.target}</target>
+              <!-- release>${maven.compiler.release}</release -->
+            </configuration>
+            <dependencies>
+              <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-compiler-javac-errorprone</artifactId>
+                <version>2.8.5</version>
+              </dependency>
+            </dependencies>
+          </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -105,32 +527,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.0.2</version>
-        <executions>
-          <execution>
-            <id>analyze</id>
-            <goals>
-              <goal>analyze-only</goal>
-            </goals>
-            <configuration>
-              <failOnWarning>false</failOnWarning>
-              <outputXML>true</outputXML>
-            </configuration>
-          </execution>
-          <execution>
-            <id>copy-dependencies</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/lib/</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -145,7 +541,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.7.0</version>
+          <version>3.8.0</version>
           <configuration>
             <source>1.8</source>
             <target>1.8</target>
@@ -159,7 +555,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.7</version>
+          <version>3.7.1</version>
           <configuration>
             <locales>en</locales>
             <publishDate position="left" format="yyyy-MM-dd hh:mm:ss" />
@@ -168,7 +564,33 @@
       </plugins>
     </pluginManagement>
   </build>
-
+  <dependencies>
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.4.0-b180830.0359</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.xml.ws</groupId>
+      <artifactId>jaxws-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.metro</groupId>
+      <artifactId>webservices-api</artifactId>
+      <version>2.4.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>2.4.0-b180830.0438</version>
+    </dependency>
+  </dependencies>
 
   <!-- =========================================================== -->
   <!-- Infrastructure                                              -->
@@ -237,12 +659,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jxr-plugin</artifactId>
-        <version>2.5</version>
+        <version>3.0.0</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.9</version>
+        <version>3.0.0</version>
         <inherited>false</inherited>
         <reportSets>
           <reportSet>
@@ -259,7 +681,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
         <configuration>
           <aggregate>true</aggregate>
         </configuration>
@@ -285,7 +707,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.9.0</version>
+        <version>3.11.0</version>
         <configuration>
           <targetJdk>1.8</targetJdk>
           <excludes>

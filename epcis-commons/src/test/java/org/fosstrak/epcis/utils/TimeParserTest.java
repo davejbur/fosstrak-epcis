@@ -23,16 +23,16 @@ package org.fosstrak.epcis.utils;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.TimeZone;
-
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests if time strings are correctly parsed and Calendars are correctly
  * formatted using TimeParser.
- * 
+ *
  * @author Marco Steybe
  */
-public class TimeParserTest extends TestCase {
+public class TimeParserTest {
 
     // date and times to be tested
     private static final String T0 = "2007-11-28";
@@ -46,10 +46,11 @@ public class TimeParserTest extends TestCase {
     /**
      * Test method for
      * {@link org.fosstrak.epcis.utils.TimeParser#parseAsCalendar(java.lang.String)}.
-     * 
+     *
      * @throws ParseException
      *             If an error parsing a date occurred.
      */
+    @Test
     public void testParse() throws ParseException {
         Calendar calAct = null;
         try {
@@ -110,6 +111,7 @@ public class TimeParserTest extends TestCase {
      * Test method for
      * {@link org.fosstrak.epcis.utils.TimeParser#format(java.util.Calendar)}.
      */
+    @Test
     public void testFormat() {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         cal.setTimeInMillis(0);

@@ -20,18 +20,18 @@
 
 package org.fosstrak.epcis.repository.capture;
 
-import junit.framework.TestCase;
-
 import org.fosstrak.epcis.repository.InvalidFormatException;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 
 /**
  * Tests some features of the CaptureOperationsModule class.
  * <p>
  * TODO: add more tests
- * 
+ *
  * @author Marco Steybe
  */
-public class CaptureOperationsModuleTest extends TestCase {
+public class CaptureOperationsModuleTest {
 
     static {
         // provide the catalina.base property which is not available when the
@@ -42,6 +42,7 @@ public class CaptureOperationsModuleTest extends TestCase {
     }
     private static CaptureOperationsModule module = new CaptureOperationsModule();
 
+    @Test
     public void testCheckEventTimeZoneOffset() throws InvalidFormatException {
         assertEquals(module.checkEventTimeZoneOffset("+05:30"), "+05:30");
         assertEquals(module.checkEventTimeZoneOffset("-00:00"), "-00:00");
@@ -63,6 +64,7 @@ public class CaptureOperationsModuleTest extends TestCase {
         }
     }
 
+    @Test
     public void testCheckCommonEpcs() throws InvalidFormatException {
         module.checkEpc("urn:epc:id:sgtin:0652642.800031.400");
         module.checkEpc("urn:epc:id:sscc:0652642.0123456789");
@@ -72,10 +74,12 @@ public class CaptureOperationsModuleTest extends TestCase {
         module.checkEpc("urn:epc:id:giai:0652642.123456");
     }
 
+    @Test
     public void testCheckValidEpcs() throws InvalidFormatException {
         module.checkEpc("urn:epc:id:sgtin:0.0.%AB-+:judihui");
     }
 
+    @Test
     public void testCheckInvalidEpcs() throws InvalidFormatException {
         try {
             module.checkEpc("urn:epc:id:gid:1652642.800031.400.123");
