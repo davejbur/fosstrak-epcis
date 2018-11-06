@@ -77,7 +77,7 @@ import org.w3c.dom.Element;
 /**
  * GUI class for the EPCIS Capture Interface Client. Implements the GUI and the
  * creation of XML from the GUI data.
- * 
+ *
  * @author David Gubler
  */
 public class CaptureClientGui extends WindowAdapter implements ActionListener, AuthenticationOptionsChangeListener {
@@ -180,7 +180,7 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
     private JScrollPane dwOutputScrollPane;
     private JPanel dwButtonPanel;
     private JButton dwClearButton;
-    
+
     /**
      * Constructs a new CaptureClientGui initialized with a default address.
      */
@@ -190,7 +190,7 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
 
     /**
      * Constructs a new CaptureClientGui initialized with the given address.
-     * 
+     *
      * @param address
      *            The address to which the CaptureClient should sent its capture
      *            events.
@@ -236,29 +236,32 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
         mwServiceUrlLabel = new JLabel("Capture interface URL: ");
         mwServiceUrlTextField = new JTextField(client.getCaptureUrl(), 75);
         mwAuthOptions = new AuthenticationOptionsPanel(this);
-        
+
         mwServiceUrlTextField.getDocument().addDocumentListener(new DocumentListener() {
 
+      @Override
 			public void changedUpdate(DocumentEvent e) {
 				configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
 			}
 
+      @Override
 			public void insertUpdate(DocumentEvent e) {
 				configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
 			}
 
+      @Override
 			public void removeUpdate(DocumentEvent e) {
 				configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
 			}
-			
+
 			public boolean isComplete() {
 				String url = mwServiceUrlTextField.getText();
 				return url != null && url.length() > 0;
 			}
-        	
+
         });
 
-        
+
         mwShowDebugWindowCheckBox = new JCheckBox("Show debug window", false);
         mwShowDebugWindowCheckBox.addActionListener(this);
 
@@ -407,7 +410,7 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
             c.weightx = 1; c.gridx = 1;
             mwEventDataInputPanel.add(mwParentIDTextField, c);
         }
-        
+
         if (EpcisEventType.AggregationEvent == eventType) {
             c.gridy++;
             c.weightx = 0; c.gridx = 0;
@@ -415,7 +418,7 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
             c.weightx = 1; c.gridx = 1;
             mwEventDataInputPanel.add(mwChildEPCsTextField, c);
         }
-        
+
         if (EpcisEventType.QuantityEvent == eventType) {
             c.gridy++;
             c.weightx = 0; c.gridx = 0;
@@ -540,10 +543,11 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
     /**
      * Event dispatcher. Very simple events may be processed directly within
      * this method.
-     * 
+     *
      * @param e
      *            for the Action
      */
+    @Override
     public void actionPerformed(final ActionEvent e) {
         if (e.getSource() == mwEventTypeChooserComboBox) {
             mwEventTypeChooserComboBoxChanged();
@@ -833,11 +837,12 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
     /**
      * Event handler for window manager closing events. Overrides the default,
      * empty method.
-     * 
+     *
      * @param e
      *            The WindowEvent.
      * @see java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)
      */
+    @Override
     public void windowClosing(final WindowEvent e) {
         if (e.getSource() == debugWindow) {
             mwShowDebugWindowCheckBox.setSelected(false);
@@ -869,7 +874,7 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
 
     /**
      * Removes a row from the Business Transactions.
-     * 
+     *
      * @param button
      *            The JButton which generated the event.
      */
@@ -953,7 +958,7 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
     /**
      * Instantiates a new CaptureClientGui using a look-and-feel that matches
      * the operating system.
-     * 
+     *
      * @param args
      *            The address to which the CaptureClient should send the capture
      *            events. If omitted, a default address will be provided.
@@ -972,6 +977,7 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
         }
     }
 
+    @Override
 	public void configurationChanged(AuthenticationOptionsChangeEvent ace) {
         if (ace.isComplete()) {
         	mwGenerateEventButton.setEnabled(true);

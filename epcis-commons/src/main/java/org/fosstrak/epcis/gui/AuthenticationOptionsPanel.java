@@ -48,7 +48,7 @@ import org.fosstrak.epcis.utils.AuthenticationType;
  * inline beneath the "URL" text field in the capture and query clients. It has two subcomponents
  * (BasicOptionsPanel and CertificateOptionsPanel) that contain inputs relevant
  * to the parameters for those authentication methods.
- * 
+ *
  * @author Sean Wellington
  */
 public class AuthenticationOptionsPanel extends JPanel implements ActionListener {
@@ -61,7 +61,7 @@ public class AuthenticationOptionsPanel extends JPanel implements ActionListener
     	authTypes.put("Basic", AuthenticationType.BASIC);
     	authTypes.put("X.509 Certificate", AuthenticationType.HTTPS_WITH_CLIENT_CERT);
     }
-    
+
     private AuthenticationOptionsChangeListener helper;
 
     private JLabel authTypeLabel;
@@ -96,6 +96,7 @@ public class AuthenticationOptionsPanel extends JPanel implements ActionListener
         selectedOptionsPanel = noneOptions;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (authTypeSelector == e.getSource()) {
             selectedOptionsPanel.setVisible(false);
@@ -119,14 +120,16 @@ public class AuthenticationOptionsPanel extends JPanel implements ActionListener
         public boolean isComplete();
     }
 
-    private class NoneOptionsPanel extends JPanel implements OptionsPanel {
+    private static class NoneOptionsPanel extends JPanel implements OptionsPanel {
 
         private static final long serialVersionUID = -3875349682626806242L;
 
+        @Override
         public Object[] getAuthenticationOptions() {
             return new Object[] { AuthenticationType.NONE };
         }
 
+        @Override
         public boolean isComplete() {
             return true;
         }
@@ -161,23 +164,28 @@ public class AuthenticationOptionsPanel extends JPanel implements ActionListener
             setVisible(false);
         }
 
+        @Override
         public Object[] getAuthenticationOptions() {
             return new Object[] {
                     AuthenticationType.BASIC, userNameInput.getText(), new String(passwordInput.getPassword()) };
         }
 
+        @Override
         public void changedUpdate(DocumentEvent e) {
             helper.configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
         }
 
+        @Override
         public void insertUpdate(DocumentEvent e) {
             helper.configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
         }
 
+        @Override
         public void removeUpdate(DocumentEvent e) {
             helper.configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
         }
 
+        @Override
         public boolean isComplete() {
             String userName = userNameInput.getText();
             char[] password = passwordInput.getPassword();
@@ -219,11 +227,13 @@ public class AuthenticationOptionsPanel extends JPanel implements ActionListener
 
             fileChooser = new JFileChooser();
             fileChooser.setFileFilter(new FileFilter() {
+                @Override
                 public boolean accept(File pathname) {
                     String s = pathname.getName();
                     return pathname.isDirectory() || s.endsWith(".p12") || s.endsWith(".jks");
                 }
 
+                @Override
                 public String getDescription() {
                     return "Key Store Files (*.jks; *.p12)";
                 }
@@ -232,12 +242,14 @@ public class AuthenticationOptionsPanel extends JPanel implements ActionListener
             setVisible(false);
         }
 
+        @Override
         public Object[] getAuthenticationOptions() {
             return new Object[] {
                     AuthenticationType.HTTPS_WITH_CLIENT_CERT, keyStoreInput.getText(),
                     new String(passwordInput.getPassword()) };
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == loadKeyStoreButton) {
                 int returnCode = fileChooser.showOpenDialog(getRootPane());
@@ -249,20 +261,24 @@ public class AuthenticationOptionsPanel extends JPanel implements ActionListener
             }
         }
 
+        @Override
         public boolean isComplete() {
             String filename = keyStoreInput.getText();
             char[] password = passwordInput.getPassword();
             return (filename != null && filename.length() > 0) && (password != null && password.length > 0);
         }
 
+        @Override
         public void changedUpdate(DocumentEvent e) {
             helper.configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
         }
 
+        @Override
         public void insertUpdate(DocumentEvent e) {
             helper.configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
         }
 
+        @Override
         public void removeUpdate(DocumentEvent e) {
             helper.configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
         }

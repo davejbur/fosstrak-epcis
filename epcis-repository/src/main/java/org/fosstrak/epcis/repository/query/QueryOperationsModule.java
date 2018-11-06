@@ -90,7 +90,7 @@ import org.w3c.dom.NodeList;
  * EPCIS Query Operations Module implementing the SOAP/HTTP binding of the Query
  * Control Interface. The implementation converts invocations from Axis into SQL
  * queries and returns the results back to the requesting client through Axis.
- * 
+ *
  * @author David Gubler
  * @author Alain Remund
  * @author Arthur van Dorp
@@ -152,20 +152,20 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      * of the corresponding type.
      * <p>
      * Consider the following example of a query parameter:
-     * 
+     *
      * <pre>
      * &lt;param&gt;
      *   &lt;name&gt;GE_eventTime&lt;/name&gt;
      *   &lt;value&gt;2007-07-07T07:07:07+02:00&lt;/value&gt;
      * &lt;/param&gt;
      * </pre>
-     * 
+     *
      * For the query parameter value, CXF will return an instance of
      * org.w3c.dom.Element containing the text value
      * "2007-07-07T07:07:07+02:00". However, if the user provides the following
      * instead, CXF will return an instance of
      * javax.xml.datatype.XMLGregorianCalendar.
-     * 
+     *
      * <pre>
      * &lt;param&gt;
      *   &lt;name&gt;GE_eventTime&lt;/name&gt;
@@ -177,11 +177,11 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      *   &lt;/value&gt;
      * &lt;/param&gt;
      * </pre>
-     * 
+     *
      * As a consequence, we always first need to check if the value is an
      * instance of Element, and if so, we need to parse it manually according to
      * the semantics of the parameter name.
-     * 
+     *
      * @param queryParams
      *            The query parameters.
      * @param eventType
@@ -612,7 +612,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * Checks if the given List contains valid event type strings, i.e.,
      * AggregationEvent, ObjectEvent, QuantityEvent, or TransactionEvent
-     * 
+     *
      * @param eventTypes
      *            The List of Strings to check.
      * @throws QueryParameterExceptionResponse
@@ -630,7 +630,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
 
     /**
      * Parses the given query parameter value as String.
-     * 
+     *
      * @param queryParamValue
      *            The query parameter value to be parsed as String.
      * @return The Float holding the value of the query parameter.
@@ -648,7 +648,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
 
     /**
      * Parses the given query parameter value as Float.
-     * 
+     *
      * @param queryParamValue
      *            The query parameter value to be parsed as Float.
      * @return The Float holding the value of the query parameter.
@@ -668,7 +668,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
 
     /**
      * Parses the given query parameter value as Timestamp.
-     * 
+     *
      * @param queryParamValue
      *            The query parameter value to be parsed as Timestamp.
      * @param queryParamName
@@ -713,7 +713,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
 
     /**
      * Parses the given query parameter value as Integer.
-     * 
+     *
      * @param queryParamValue
      *            The query parameter value to be parsed as Integer.
      * @return The Integer holding the value of the query parameter.
@@ -733,7 +733,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
 
     /**
      * Parses the given query parameter value into an ArrayOfString object.
-     * 
+     *
      * @param queryParamValue
      *            The value of the query parameter to be parsed.
      * @return The ArrayOfString object representing the list of strings from
@@ -777,7 +777,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * Runs a MasterDataQuery for the given QueryParam array and returns the
      * QueryResults.
-     * 
+     *
      * @param queryParams
      *            The parameters for running the MasterDataQuery.
      * @return The QueryResults.
@@ -900,12 +900,12 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      * creates a QueryParameterException from the given message, and returns a
      * new QueryParameterExceptionResponse. Use this method to conveniently
      * return a user error message back to the requesting service caller, e.g.:
-     * 
+     *
      * <pre>
      * String msg = &quot;unable to parse query parameter&quot;
      * throw new queryParameterException(msg, null);
      * </pre>
-     * 
+     *
      * @param msg
      *            A user error message.
      * @param e
@@ -930,7 +930,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      * Checks if the given action values are valid, i.e. all values must be one
      * of ADD, OBSERVE, or DELETE. Throws an exception if one of the values is
      * invalid.
-     * 
+     *
      * @param actions
      *            The action values to be checked.
      * @throws QueryParameterException
@@ -948,7 +948,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
 
     /**
      * Saves the map with the subscriptions to the message context.
-     * 
+     *
      * @param subscriptions
      *            The map with the subscriptions.
      */
@@ -958,7 +958,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
 
     /**
      * Retrieves the map with the subscriptions from the servlet context.
-     * 
+     *
      * @return The map with the subscriptions.
      * @throws ImplementationException
      *             If the map could not be reloaded.
@@ -981,6 +981,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<String> getQueryNames() throws SecurityExceptionResponse, ValidationExceptionResponse,
             ImplementationExceptionResponse {
         LOG.info("Invoking 'getQueryNames'");
@@ -990,6 +991,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getStandardVersion() throws SecurityExceptionResponse, ValidationExceptionResponse,
             ImplementationExceptionResponse {
         LOG.info("Invoking 'getStandardVersion'");
@@ -999,6 +1001,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<String> getSubscriptionIDs(String queryName) throws NoSuchNameExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, ImplementationExceptionResponse {
         try {
@@ -1030,6 +1033,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getVendorVersion() throws SecurityExceptionResponse, ValidationExceptionResponse,
             ImplementationExceptionResponse {
         LOG.info("Invoking 'getVendorVersion'");
@@ -1039,6 +1043,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public QueryResults poll(String queryName, QueryParams queryParams) throws NoSuchNameExceptionResponse,
             QueryParameterExceptionResponse, QueryTooComplexExceptionResponse, QueryTooLargeExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, ImplementationExceptionResponse {
@@ -1146,6 +1151,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void subscribe(String queryName, QueryParams params, String dest, SubscriptionControls controls,
             String subscriptionID) throws NoSuchNameExceptionResponse, InvalidURIExceptionResponse,
             DuplicateSubscriptionExceptionResponse, QueryParameterExceptionResponse, QueryTooComplexExceptionResponse,
@@ -1292,6 +1298,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void unsubscribe(String subscriptionID) throws NoSuchSubscriptionExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, ImplementationExceptionResponse {
         try {
@@ -1335,10 +1342,11 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     /**
      * A Transformer which expects a String instance, appends a "*" to the end
      * of the String, and returns the new String.
-     * 
+     *
      * @author Marco Steybe
      */
     private static class StringTransformer implements Transformer {
+        @Override
         public Object transform(Object o) {
             if (o instanceof String) {
                 o = ((String) o).concat("*");
@@ -1472,10 +1480,10 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      * Compares two EPCIS events according to their eventTime or recordTime.
      * Careful: the objects to be compared are instances of EPCISEvent,
      * otherwise a ClassCastException will be thrown.
-     * 
+     *
      * @author Marco Steybe
      */
-    public class EventComparator implements Comparator<Object> {
+    public static class EventComparator implements Comparator<Object> {
         private boolean orderByEventTime = false;
         private OrderDirection orderDirection = null;
 
@@ -1484,6 +1492,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
             this.orderDirection = orderDirection;
         }
 
+        @Override
         public int compare(Object o1, Object o2) {
             EPCISEventType event1 = (EPCISEventType) o1;
             EPCISEventType event2 = (EPCISEventType) o2;

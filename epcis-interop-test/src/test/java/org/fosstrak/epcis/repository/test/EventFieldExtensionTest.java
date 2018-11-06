@@ -34,7 +34,7 @@ import org.fosstrak.epcis.queryclient.QueryControlClient;
  * fieldname extension greater the given value. If everything works as expected,
  * we have correctly inserted the event extension with the correct data type
  * into the database.
- * 
+ *
  * @author Marco Steybe
  */
 public class EventFieldExtensionTest extends TestCase {
@@ -45,7 +45,7 @@ public class EventFieldExtensionTest extends TestCase {
 
     /**
      * Tests event fieldname extensions.
-     * 
+     *
      * @throws Exception
      *             Any exception, caught by the JUnit framework.
      */
@@ -70,6 +70,7 @@ public class EventFieldExtensionTest extends TestCase {
     /**
      * @see junit.framework.TestCase#setUp()
      */
+    @Override
     public void setUp() throws IOException {
         StringBuilder sb = new StringBuilder();
         sb

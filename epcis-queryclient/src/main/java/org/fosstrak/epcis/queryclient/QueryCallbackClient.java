@@ -45,9 +45,10 @@ public class QueryCallbackClient extends HttpServlet implements QueryCallbackInt
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryCallbackInterface#callbackResults(org.fosstrak.epcis.soapapi.QueryResults)
      */
+    @Override
     public void callbackResults(QueryResults result) {
         InputStream is = new ByteArrayInputStream(callbackResults.getBytes());
         try {
@@ -62,7 +63,7 @@ public class QueryCallbackClient extends HttpServlet implements QueryCallbackInt
      * Performs a callback for a standing query. When the callback returns, the
      * given String will be populated with an XML representation of a standing
      * query result.
-     * 
+     *
      * @param result
      *            The String to be populated.
      */
@@ -72,9 +73,10 @@ public class QueryCallbackClient extends HttpServlet implements QueryCallbackInt
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryCallbackInterface#callbackImplementationException(org.fosstrak.epcis.soapapi.ImplementationException)
      */
+    @Override
     public void callbackImplementationException(final ImplementationException e) {
         // TODO implement
         throw new UnsupportedOperationException();
@@ -82,9 +84,10 @@ public class QueryCallbackClient extends HttpServlet implements QueryCallbackInt
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryCallbackInterface#callbackQueryTooLargeException(org.fosstrak.epcis.soapapi.QueryTooLargeException)
      */
+    @Override
     public void callbackQueryTooLargeException(final QueryTooLargeException e) {
         // TODO implement
         throw new UnsupportedOperationException();
@@ -92,10 +95,11 @@ public class QueryCallbackClient extends HttpServlet implements QueryCallbackInt
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
+    @Override
     public void doPost(final HttpServletRequest req, final HttpServletResponse rsp) throws ServletException,
             IOException {
         rsp.setContentType("text/plain");
@@ -114,10 +118,11 @@ public class QueryCallbackClient extends HttpServlet implements QueryCallbackInt
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      */
+    @Override
     public void doGet(final HttpServletRequest req, final HttpServletResponse rsp) throws ServletException, IOException {
         rsp.setContentType("text/xml");
         final PrintWriter out = rsp.getWriter();

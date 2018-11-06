@@ -112,7 +112,7 @@ import org.xml.sax.SAXParseException;
  * CaptureOperationsServlet; this class should implement EpcisCaptureInterface
  * such that CaptureOperationsServlet can call its capture method and provide it
  * with the parsed events.
- * 
+ *
  * @author David Gubler
  * @author Alain Remund
  * @author Marco Steybe
@@ -200,7 +200,7 @@ public class CaptureOperationsModule {
      * Initializes the EPCIS schema used for validating incoming capture
      * requests. Loads the WSDL and XSD files from the classpath (the schema is
      * bundled with epcis-commons.jar).
-     * 
+     *
      * @return An instantiated schema validation object.
      */
     private Schema initEpcisSchema(String xsdFile) {
@@ -225,7 +225,7 @@ public class CaptureOperationsModule {
 
     /**
      * Resets the database.
-     * 
+     *
      * @throws SQLException
      *             If something goes wrong resetting the database.
      * @throws IOException
@@ -288,7 +288,7 @@ public class CaptureOperationsModule {
      * Implements the EPCIS capture operation. Takes an input stream, extracts
      * the payload into an XML document, validates the document against the
      * EPCIS schema, and captures the EPCIS events given in the document.
-     * 
+     *
      * @throws IOException
      *             If an error occurred while validating the request or writing
      *             the response.
@@ -387,15 +387,18 @@ public class CaptureOperationsModule {
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             builder.setErrorHandler(new ErrorHandler() {
+                @Override
                 public void warning(SAXParseException e) throws SAXException {
                     LOG.warn("warning while parsing XML input: " + e.getMessage());
                 }
 
+                @Override
                 public void fatalError(SAXParseException e) throws SAXException {
                     LOG.error("non-recovarable error while parsing XML input: " + e.getMessage());
                     throw e;
                 }
 
+                @Override
                 public void error(SAXParseException e) throws SAXException {
                     LOG.error("error while parsing XML input: " + e.getMessage());
                     throw e;
@@ -485,7 +488,7 @@ public class CaptureOperationsModule {
      * into the database. The parse routine is generic for all event types; the
      * query generation part has some if/elses to take care of different event
      * parameters.
-     * 
+     *
      * @param eventNode
      *            The current event node.
      * @param eventType
@@ -707,7 +710,7 @@ public class CaptureOperationsModule {
      * (nkef) Takes an XML document node, parses it as EPCIS Master Data and
      * inserts the data into the database. The parse routine is generic for all
      * Vocabulary types;
-     * 
+     *
      * @param vocNode
      *            The current vocabulary node.
      * @param vocType
@@ -794,7 +797,7 @@ public class CaptureOperationsModule {
      * be null in which case an empty String is returned. Otherwise, the value
      * is either given as XML attribute named 'value' or as inline text, see the
      * sample below. <br>
-     * 
+     *
      * <pre>
      * {@code
      * <VocabularyElement id="urn:epc:id:sgln:0037000.00729.0">
@@ -810,7 +813,7 @@ public class CaptureOperationsModule {
      * </VocabularyElement>
      * }
      * </pre>
-     * 
+     *
      * @return the attribute value as String.
      */
     private String parseVocAttributeValue(Node vocAttrNode) {
@@ -843,7 +846,7 @@ public class CaptureOperationsModule {
 
     /**
      * Parses the xml tree for epc nodes and returns a list of EPC URIs.
-     * 
+     *
      * @param eventType
      * @param epcNode
      *            The parent Node from which EPC URIs should be extracted.
@@ -919,7 +922,7 @@ public class CaptureOperationsModule {
     /**
      * Parses the xml tree for epc nodes and returns a List of BizTransaction
      * URIs with their corresponding type.
-     * 
+     *
      * @param bizNode
      *            The parent Node from which BizTransaction URIs should be
      *            extracted.
@@ -971,7 +974,7 @@ public class CaptureOperationsModule {
      * already existing entries; if found, the corresponding ID is returned. If
      * not found, the vocabulary is extended if "insertmissingvoc" is true;
      * otherwise an SQLException is thrown
-     * 
+     *
      * @param tableName
      *            The name of the vocabulary table.
      * @param uri
@@ -1025,7 +1028,7 @@ public class CaptureOperationsModule {
      * searching for already existing entries; if found, the corresponding ID is
      * returned. If not found, the vocabulary is extended if "insertmissingvoc"
      * is true; otherwise an SQLException is thrown
-     * 
+     *
      * @param tableName
      *            The name of the vocabulary table.
      * @param uri
@@ -1118,7 +1121,7 @@ public class CaptureOperationsModule {
     /**
      * (nkef) Delete the a vocabulary's Element Descendants and all of their
      * Attributes
-     * 
+     *
      * @param session
      * @param vocabularyType
      * @param vocabularyElementURI
@@ -1138,7 +1141,7 @@ public class CaptureOperationsModule {
 
     /**
      * (nkef) Delete selected id vocabulary elements attributes
-     * 
+     *
      * @param session
      * @param vocabularyType
      * @param vocabularyElementID
@@ -1160,7 +1163,7 @@ public class CaptureOperationsModule {
      * already existing entries; if found, the corresponding ID is returned. If
      * not found, the vocabulary is extended if "insertmissingvoc" is true;
      * otherwise an SQLException is thrown
-     * 
+     *
      * @param tableName
      *            The name of the vocabulary table.
      * @param uri
@@ -1237,7 +1240,7 @@ public class CaptureOperationsModule {
 
     /**
      * TODO: javadoc!
-     * 
+     *
      * @param textContent
      * @return
      * @throws InvalidFormatException
@@ -1268,7 +1271,7 @@ public class CaptureOperationsModule {
 
     /**
      * TODO: javadoc!
-     * 
+     *
      * @param textContent
      * @return
      * @throws InvalidFormatException
@@ -1285,7 +1288,7 @@ public class CaptureOperationsModule {
     /**
      * Check EPC according to 'pure identity' URI as specified in Tag Data
      * Standard.
-     * 
+     *
      * @param textContent
      * @throws InvalidFormatException
      */

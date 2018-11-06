@@ -41,7 +41,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Test for unsubscribing queries (SE44).
- * 
+ *
  * @author Marco Steybe
  */
 public class CallbackUnsubscribeTest extends TestCase {
@@ -53,7 +53,7 @@ public class CallbackUnsubscribeTest extends TestCase {
     /**
      * Tests if we receive a notification for a subscribed query, and we receive
      * no further notification after the query is unsubscribed.
-     * 
+     *
      * @throws Exception
      *             Any exception, caught by the JUnit framework.
      */
@@ -103,7 +103,7 @@ public class CallbackUnsubscribeTest extends TestCase {
 
     /**
      * Parses a string into an XML Document.
-     * 
+     *
      * @param resp
      *            The string to be parsed.
      * @return The parsed XML Document.
@@ -123,9 +123,10 @@ public class CallbackUnsubscribeTest extends TestCase {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see junit.framework.TestCase#tearDown()
      */
+    @Override
     protected void tearDown() throws Exception {
         try {
             client.unsubscribe("QuerySE44");

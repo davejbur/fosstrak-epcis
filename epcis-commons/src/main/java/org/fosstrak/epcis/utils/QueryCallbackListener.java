@@ -38,7 +38,7 @@ import java.nio.charset.CharsetDecoder;
  * EPCIS Query Callback interface. The server is not multi-threaded, so it will
  * only accept one request at a time. It will only allow one instance
  * (singleton) and will be bound to a predefined port on localhost.
- * 
+ *
  * @author Marco Steybe
  */
 public final class QueryCallbackListener extends Thread {
@@ -56,7 +56,7 @@ public final class QueryCallbackListener extends Thread {
     /**
      * Instantiates a new SubscriptionResponseListener listening on the given
      * port.
-     * 
+     *
      * @throws IOException
      *             If an error setting up the communication socket occurred.
      */
@@ -79,9 +79,10 @@ public final class QueryCallbackListener extends Thread {
 
     /**
      * Keeps this listener running until {@link #stopRunning()} is called.
-     * 
+     *
      * @see java.lang.Thread#run()
      */
+    @Override
     public void run() {
         isRunning = true;
         while (isRunning) {
@@ -108,7 +109,7 @@ public final class QueryCallbackListener extends Thread {
     /**
      * Handles an incoming HTTP connection, reading the contents, and parsing it
      * as XML.
-     * 
+     *
      * @param client
      *            The client Socket.
      * @throws IOException
@@ -161,7 +162,7 @@ public final class QueryCallbackListener extends Thread {
 
     /**
      * Extracts the XML contents from the given String.
-     * 
+     *
      * @param resp
      *            The response from which the XML contents should be extracted.
      */

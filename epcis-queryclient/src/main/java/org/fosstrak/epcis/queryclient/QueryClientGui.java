@@ -86,7 +86,7 @@ import org.fosstrak.epcis.utils.TimeParser;
 
 /**
  * Implements the GUI part of the EPCIS Query Interface client.
- * 
+ *
  * @author David Gubler
  */
 public class QueryClientGui extends WindowAdapter implements ActionListener, AuthenticationOptionsChangeListener {
@@ -221,7 +221,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
         try {
             initGui(null);
         } catch (MalformedURLException e) {
-            // shouldn't happen because url is loaded from properties 
+            // shouldn't happen because url is loaded from properties
         }
     }
 
@@ -230,20 +230,21 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
      * endpoint address. If no such address is provided, the properties file is
      * checked; if there is an error with reading the properties, a default url
      * will be provided.
-     * 
+     *
      * @param address
      *            The address to send the queries to.
      */
     public QueryClientGui(final String address) throws MalformedURLException {
         initGui(address);
     }
-    
+
     private void initGui(String url) throws MalformedURLException {
         generateParamHashMap();
         drawDebugWindow();
         client = new QueryControlClient(url);
         mwServiceUrlTextField.setText(client.getQueryUrl());
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 drawMainWindow(client.getQueryUrl());
             }
@@ -535,6 +536,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
         isSubscribed = new JCheckBox("Subscribe this query");
         mwMainPanel.add(isSubscribed);
         isSubscribed.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 if (mwSubscriptionPanel.isVisible()) {
                     mwSubscriptionPanel.setVisible(false);
@@ -586,14 +588,17 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
 
         mwServiceUrlTextField.getDocument().addDocumentListener(new DocumentListener() {
 
+            @Override
             public void changedUpdate(DocumentEvent e) {
                 configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
             }
 
+            @Override
             public void insertUpdate(DocumentEvent e) {
                 configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
             }
 
+            @Override
             public void removeUpdate(DocumentEvent e) {
                 configurationChanged(new AuthenticationOptionsChangeEvent(this, isComplete()));
             }
@@ -658,10 +663,10 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
         mwTransactionEventsCheckBox = new JCheckBox("TransactionEvents");
         mwEventTypeSelectPanel.add(mwTransactionEventsCheckBox);
 
-        mwQuerySelectComboBoxes = new LinkedList<JComboBox<String>>();
-        mwQueryArgumentTextFields = new LinkedList<JTextFieldEnhanced>();
+        mwQuerySelectComboBoxes = new LinkedList<>();
+        mwQueryArgumentTextFields = new LinkedList<>();
 
-        mwQuerySelectComboBoxes.add(new JComboBox<String>(queryParameterUsertext));
+        mwQuerySelectComboBoxes.add(new JComboBox<>(queryParameterUsertext));
         ((JComboBox<String>) mwQuerySelectComboBoxes.getFirst()).addActionListener(this);
         queryParamsUserText.get("ignore");
         mwQueryArgumentTextFields.add(new JTextFieldEnhanced(15, queryParamsUserText.get("ignore")));
@@ -703,6 +708,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
         triggerIf.setSelected(false);
         mwSubscriptionPanel.add(triggerIf);
         triggerIf.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent e) {
                 if (mwScheduleMonthField.isEnabled()) {
                     mwScheduleMonthField.setEnabled(false);
@@ -950,6 +956,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
         dwButtonPanel.add(dwClearButton);
     }
 
+    @Override
     public final void actionPerformed(final ActionEvent e) {
         int i;
         if (e.getSource() == mwRunQueryButton) {
@@ -1164,7 +1171,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
     /**
      * Handles the event of a changed JComboBox in the query arguments section
      * Will add or remove JComboBoxes as necessary and resize the window.
-     * 
+     *
      * @param i
      *            The index of the combo box.
      */
@@ -1258,7 +1265,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
     /**
      * Removes the row ith row of the query parameters list and updates
      * constraints of the others. Only used by queryselect_changed()
-     * 
+     *
      * @param i
      *            The index of the row to be removed.
      */
@@ -1292,7 +1299,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
     /**
      * Adds another row at the end of the query parameters list. Only used by
      * queryselect_changed()
-     * 
+     *
      * @param i
      *            The index of the row to be added.
      */
@@ -1334,7 +1341,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
      * A extended JTextField which allows us to store the corresponding
      * QueryItem.
      */
-    public class JTextFieldEnhanced extends JTextField {
+    public static class JTextFieldEnhanced extends JTextField {
 
         private static final long serialVersionUID = -8874871130001273285L;
 
@@ -1345,7 +1352,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
 
         /**
          * Constructor which assigns a QueryItem.
-         * 
+         *
          * @param columns
          *            for the length of the JTextField
          * @param item
@@ -1358,7 +1365,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
 
         /**
          * Default Constructor.
-         * 
+         *
          * @param columns
          *            for the length of the JTextField
          */
@@ -1375,7 +1382,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
 
         /**
          * Sets another QueryItem an does the update of the tool-tip.
-         * 
+         *
          * @param item
          *            the new QueryItem
          */
@@ -1388,7 +1395,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
     /**
      * A new class for a QueryItem which can store all its specific features.
      */
-    public class QueryItem {
+    public static class QueryItem {
 
         private boolean required;
 
@@ -1498,6 +1505,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
         }
     }
 
+    @Override
     public void configurationChanged(AuthenticationOptionsChangeEvent ace) {
         this.configurationChanged = true;
         setButtonsEnabled(ace.isComplete());
@@ -1506,7 +1514,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
     /**
      * Prints the results from a query invocation to the debug window and
      * returns a two-dimensional array in a format suitable for a JTable object.
-     * 
+     *
      * @param eventList
      *            The result list containing the matching events.
      * @return A two-dimensional array containing the matching events in a
@@ -1729,7 +1737,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
 
     /**
      * Add a new query parameter.
-     * 
+     *
      * @param param
      *            The query parameter to add.
      */
@@ -1740,7 +1748,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
     /**
      * Forces the client to reconfigure the service if the any of its parameters
      * (authentication, endpoint address) have been changed.
-     * 
+     *
      * @throws Exception
      */
     private void configureServiceIfNecessary() throws Exception {
@@ -1754,7 +1762,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
     /**
      * Run the query with the currently set query arguments Returns the results
      * in a format that is suitable for JTable.
-     * 
+     *
      * @return The pretty-printed query results.
      * @throws Exception
      *             If any Exception occurred while invoking the query service.
@@ -1790,7 +1798,7 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
     /**
      * Instantiates a new QueryClientGui and sets its look-and-feel to the one
      * matching the current operating system.
-     * 
+     *
      * @param args
      *            The address to which the QueryClient should send the queries
      *            to. If omitted, a default address will be provided.

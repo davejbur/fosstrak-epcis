@@ -46,7 +46,7 @@ import org.apache.commons.logging.LogFactory;
  * The CaptureOperationsBackendSQL uses basic SQL statements (actually
  * <code>PreparedStatement</code>s) to implement the CaptureOperationsBackend
  * interface.
- * 
+ *
  * @author Alain Remund
  * @author Marco Steybe
  * @author Sean Wellington
@@ -76,6 +76,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void dbReset(final Connection dbconnection, final String dbResetScript) throws SQLException, IOException {
         LOG.info("Running db reset script.");
         Statement stmt = null;
@@ -103,6 +104,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public CaptureOperationsSession openSession(final DataSource dataSource) throws SQLException {
         return new CaptureOperationsSession(dataSource.getConnection());
     }
@@ -110,6 +112,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Long insertObjectEvent(final CaptureOperationsSession session, final Timestamp eventTime,
             final Timestamp recordTime, final String eventTimeZoneOffset, final Long bizStepId,
             final Long dispositionId, final Long readPointId, final Long bizLocationId, final String action)
@@ -121,6 +124,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Long insertTransactionEvent(final CaptureOperationsSession session, final Timestamp eventTime,
             final Timestamp recordTime, final String eventTimeZoneOffset, final Long bizStepId,
             final Long dispositionId, final Long readPointId, final Long bizLocationId, final String action,
@@ -132,6 +136,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Long insertAggregationEvent(final CaptureOperationsSession session, final Timestamp eventTime,
             final Timestamp recordTime, final String eventTimeZoneOffset, final Long bizStepId,
             final Long dispositionId, final Long readPointId, final Long bizLocationId, final String action,
@@ -143,6 +148,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Long insertQuantityEvent(final CaptureOperationsSession session, final Timestamp eventTime,
             final Timestamp recordTime, final String eventTimeZoneOffset, final Long bizStepId,
             final Long dispositionId, final Long readPointId, final Long bizLocationId, final Long epcClassId,
@@ -154,7 +160,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * Inserts a new EPCIS event into the database by supplying a
      * PreparedStatement with the given parameters.
-     * 
+     *
      * @param session
      *            The database session.
      * @param eventTime
@@ -192,17 +198,23 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
             throws SQLException {
 
         PreparedStatement ps;
-        if (eventName.equals(EpcisConstants.AGGREGATION_EVENT)) {
-            ps = session.getInsert(SQL_INSERT_AGGREGATIONEVENT);
-        } else if (eventName.equals(EpcisConstants.OBJECT_EVENT)) {
-            ps = session.getInsert(SQL_INSERT_OBJECTEVENT);
-        } else if (eventName.equals(EpcisConstants.QUANTITY_EVENT)) {
-            ps = session.getInsert(SQL_INSERT_QUANTITYEVENT);
-        } else if (eventName.equals(EpcisConstants.TRANSACTION_EVENT)) {
-            ps = session.getInsert(SQL_INSERT_TRANSACTIONEVENT);
-        } else {
-            throw new SQLException("Encountered unknown event element '" + eventName + "'.");
-        }
+      switch (eventName)
+      {
+        case EpcisConstants.AGGREGATION_EVENT:
+          ps = session.getInsert(SQL_INSERT_AGGREGATIONEVENT);
+          break;
+        case EpcisConstants.OBJECT_EVENT:
+          ps = session.getInsert(SQL_INSERT_OBJECTEVENT);
+          break;
+        case EpcisConstants.QUANTITY_EVENT:
+          ps = session.getInsert(SQL_INSERT_QUANTITYEVENT);
+          break;
+        case EpcisConstants.TRANSACTION_EVENT:
+          ps = session.getInsert(SQL_INSERT_TRANSACTIONEVENT);
+          break;
+        default:
+          throw new SQLException("Encountered unknown event element '" + eventName + "'.");
+      }
 
         // parameters 1-7 of the sql query are shared by all events
 
@@ -264,7 +276,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * Retrieves the last inserted ID chosen by the autoIncrement functionality
      * in the table with the given name.
-     * 
+     *
      * @param session
      *            The database session.
      * @param tableName
@@ -293,6 +305,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void insertEpcsForEvent(final CaptureOperationsSession session, final long eventId, final String eventType,
             final List<String> epcs) throws SQLException {
         // preparing statement for insertion of associated EPCs
@@ -315,6 +328,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Long getVocabularyElement(final CaptureOperationsSession session, final String vocabularyType,
             final String vocabularyElement) throws SQLException {
         String stmt = "SELECT id FROM " + VOCABTYPE_TABLENAME_MAP.get(vocabularyType) + " WHERE uri=?";
@@ -339,6 +353,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Long insertVocabularyElement(final CaptureOperationsSession session, final String vocabularyType,
             final String vocabularyElement) throws SQLException {
         String tableName = VOCABTYPE_TABLENAME_MAP.get(vocabularyType);
@@ -359,7 +374,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * Retrieves the business transaction with the given type and the given URI
      * from the database.
-     * 
+     *
      * @param session
      *            The database session.
      * @param bizTrans
@@ -397,6 +412,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Long insertBusinessTransaction(final CaptureOperationsSession session, final String bizTrans,
             final String bizTransType) throws SQLException {
 
@@ -432,6 +448,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void insertBusinessTransactionsForEvent(final CaptureOperationsSession session, final long eventId,
             final String eventType, final List<BusinessTransactionType> btts) throws SQLException {
         // preparing statement for insertion of associated EPCs
@@ -472,6 +489,7 @@ public class CaptureOperationsBackendSQL implements CaptureOperationsBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void insertExtensionFieldsForEvent(final CaptureOperationsSession session, final long eventId,
             final String eventType, final List<EventFieldExtension> exts) throws SQLException {
         for (EventFieldExtension ext : exts) {

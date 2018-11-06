@@ -49,7 +49,7 @@ import org.xml.sax.SAXException;
  * CaptureOperationsModule. This servlet also initializes the
  * CaptureOperationsModule properly and returns a simple information page upon
  * GET requests.
- * 
+ *
  * @author Marco Steybe
  */
 public class CaptureOperationsServlet extends HttpServlet {
@@ -73,6 +73,7 @@ public class CaptureOperationsServlet extends HttpServlet {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void init() {
         LOG.debug("Fetching capture operations module from servlet context ...");
         CaptureOperationsModule captureOperationsModule = (CaptureOperationsModule) getServletContext().getAttribute(
@@ -96,7 +97,7 @@ public class CaptureOperationsServlet extends HttpServlet {
                     "false")));
             captureOperationsModule.setDbResetScript(props.getProperty(PROP_DB_RESET_SCRIPT));
             captureOperationsModule.setEpcisSchemaFile(props.getProperty(PROP_EPCIS_SCHEMA_FILE));
-            captureOperationsModule.setEpcisMasterdataSchemaFile(props.getProperty(PROP_EPCIS_MASTER_DATA_SCHEMA_FILE));        
+            captureOperationsModule.setEpcisMasterdataSchemaFile(props.getProperty(PROP_EPCIS_MASTER_DATA_SCHEMA_FILE));
         } else {
             LOG.debug("Capture operations module found");
         }
@@ -106,7 +107,7 @@ public class CaptureOperationsServlet extends HttpServlet {
     /**
      * Loads the application properties and populates a java.util.Properties
      * instance.
-     * 
+     *
      * @param servletConfig
      *            The ServletConfig used to locate the application property
      *            file.
@@ -132,7 +133,7 @@ public class CaptureOperationsServlet extends HttpServlet {
     /**
      * Loads the application properties from classpath and populates a
      * java.util.Properties instance.
-     * 
+     *
      * @param servletConfig
      *            The ServletConfig used to locate the application property
      *            file.
@@ -158,7 +159,7 @@ public class CaptureOperationsServlet extends HttpServlet {
     /**
      * Initializes Hibernate. Reads the configuration from hibernate.cfg.xml
      * located on the classpath (WEB-INF/classes/)
-     * 
+     *
      * @return The Hibernate SessionFactory.
      * @throws ServletException
      */
@@ -171,7 +172,7 @@ public class CaptureOperationsServlet extends HttpServlet {
 
     /**
      * Handles HTTP GET requests by dispatching to simple information pages.
-     * 
+     *
      * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
      * @param req
@@ -181,6 +182,7 @@ public class CaptureOperationsServlet extends HttpServlet {
      * @throws IOException
      *             If an error occurred while writing the response.
      */
+    @Override
     public void doGet(final HttpServletRequest req, final HttpServletResponse rsp) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         String dbReset = req.getParameter("dbReset");
@@ -204,7 +206,7 @@ public class CaptureOperationsServlet extends HttpServlet {
      * the payload into an XML document, validates the document against the
      * EPCIS schema, and captures the EPCIS events given in the document. Errors
      * are caught and returned as simple plaintext messages via HTTP.
-     * 
+     *
      * @param req
      *            The HttpServletRequest.
      * @param rsp
@@ -213,10 +215,11 @@ public class CaptureOperationsServlet extends HttpServlet {
      *             If an error occurred while validating the request or writing
      *             the response.
      */
+    @Override
     public void doPost(final HttpServletRequest req, final HttpServletResponse rsp) throws ServletException, IOException {
         LOG.info("EPCIS Capture Interface invoked.");
         InputStream is = null;
-        
+
         // check if we have a POST request with form parameters
         if ("application/x-www-form-urlencoded".equalsIgnoreCase(req.getContentType())) {
             rsp.setContentType("text/plain");
@@ -238,7 +241,7 @@ public class CaptureOperationsServlet extends HttpServlet {
         } else {
             is = req.getInputStream();
         }
-        
+
         // do the capture operation and handle exceptions
         String responseMsg = "";
         String detailedMsg = "";

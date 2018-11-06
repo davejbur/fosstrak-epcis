@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
  * This is a simple schedule which can return a "next scheduled time" after now
  * or a given time. It is meant to be instantiated with a EPCIS QuerySchedule
  * but could be extended to be used otherwise.
- * 
+ *
  * @author Arthur van Dorp
  * @author Marco Steybe
  */
@@ -78,7 +78,7 @@ public class Schedule implements Serializable {
     /**
      * Constructor for creating a new schedule according to the parameters in
      * the given QuerySchedule 'schedule'.
-     * 
+     *
      * @param schedule
      *            The EPCIS style schedule to be used for constructing this
      *            schedule.
@@ -151,7 +151,7 @@ public class Schedule implements Serializable {
 
     /**
      * Calculates the next scheduled time after now.
-     * 
+     *
      * @return The next scheduled time after now.
      * @throws ImplementationException
      *             Almost any kind of error.
@@ -171,7 +171,7 @@ public class Schedule implements Serializable {
      * schedule was omitted) *and* there exists a valid smaller time <br>
      * unit, *then* return this time unit <br> - do this recursively for all
      * time units <br> - month needs to be special cased because of dayOfWeek
-     * 
+     *
      * @param time
      *            Time after which next scheduled time should be returned.
      * @return The next scheduled time after 'time'.
@@ -192,7 +192,7 @@ public class Schedule implements Serializable {
     /**
      * Returns true if the month and all smaller time units have been
      * successfully set to valid values.
-     * 
+     *
      * @param nextSchedule
      *            The current candidate for the result.
      * @return True if month and smaller units successfully set to valid values.
@@ -228,7 +228,7 @@ public class Schedule implements Serializable {
     /**
      * Returns true if the day and all smaller units have been successfully set
      * to valid values within the set month.
-     * 
+     *
      * @param nextSchedule
      *            The current candidate for the result.
      * @return True if day and smaller units successfully set to valid values.
@@ -269,7 +269,7 @@ public class Schedule implements Serializable {
     /**
      * Returns true if the hour and all smaller units have been successfully set
      * to valid values within the set day.
-     * 
+     *
      * @param nextSchedule
      *            The current candidate for the result.
      * @return True if hour and smaller units successfully set to valid values.
@@ -301,7 +301,7 @@ public class Schedule implements Serializable {
     /**
      * Returns true if the minute and all smaller units have been successfully
      * set to valid values within the set hour.
-     * 
+     *
      * @param nextSchedule
      *            The current candidate for the result.
      * @return True if minute and smaller units successfully set to valid
@@ -336,7 +336,7 @@ public class Schedule implements Serializable {
     /**
      * Returns true if the second have been successfully set to valid values
      * within the set minute.
-     * 
+     *
      * @param nextSchedule
      *            The current candidate for the result.
      * @return True if second successfully set to valid values.
@@ -357,7 +357,7 @@ public class Schedule implements Serializable {
     /**
      * Sets the specified field of the given callendar to the next scheduled
      * value. Returns whether the new value has been set and is valid.
-     * 
+     *
      * @param cal
      *            Calendar to adjust.
      * @param field
@@ -396,7 +396,7 @@ public class Schedule implements Serializable {
      * defined as the next possible value according to the calendar type used
      * possibly superseded by the defined values in the schedule we have.
      * Returns whether the new value has been set and is valid.
-     * 
+     *
      * @param cal
      *            Calendar to adjust.
      * @param field
@@ -419,7 +419,7 @@ public class Schedule implements Serializable {
      * the minimal possible value according to the calendar type possibly
      * superseded by the defined values in the schedule we have. Returns whether
      * the new value has been set and is valid.
-     * 
+     *
      * @param cal
      *            Calendar to adjust.
      * @param field
@@ -454,7 +454,7 @@ public class Schedule implements Serializable {
      * value according to the calendar type used possibly superseded by the
      * defined values in the schedule we have. Returns whether the new values
      * have been set and are all valid.
-     * 
+     *
      * @param cal
      *            The Calendar instance to adjust.
      * @param largestField
@@ -469,12 +469,16 @@ public class Schedule implements Serializable {
         switch (largestField) {
         case (MONTH):
             result = setFieldToMinimum(cal, MONTH) && result;
+        // fall through
         case (DAY_OF_MONTH):
             result = setFieldToMinimum(cal, DAY_OF_MONTH) && result;
+        // fall through
         case (HOUR_OF_DAY):
             result = setFieldToMinimum(cal, HOUR_OF_DAY) && result;
+        // fall through
         case (MINUTE):
             result = setFieldToMinimum(cal, MINUTE) && result;
+        // fall through
         case (SECOND):
             result = setFieldToMinimum(cal, SECOND) && result;
             break;
@@ -490,7 +494,7 @@ public class Schedule implements Serializable {
 
     /**
      * Returns the values belonging to the given field of a GregorianCalendar.
-     * 
+     *
      * @param field
      *            The field id of a GregorianCalendar.
      * @see GregorianCalendar
@@ -524,7 +528,7 @@ public class Schedule implements Serializable {
      * Checks whether the given values, which are either numbers or ranges, are
      * valid (parsable as Integer) and adds the value to the correct set of
      * values (e.g. seconds).
-     * 
+     *
      * @param values
      *            The numbers and ranges to be checked and added.
      * @param type
@@ -593,7 +597,7 @@ public class Schedule implements Serializable {
     /**
      * Adds a schedule value to the given set of values with some special
      * treatment for 'month' and 'dayOfWeek'.
-     * 
+     *
      * @param value
      *            The value to be added.
      * @param type

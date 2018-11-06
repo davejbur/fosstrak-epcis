@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  * initializing the logging framework. This class receives notifications about
  * changes to the servlet context of the web application, e.g., when the servlet
  * context is loaded, or is about to be shut down.
- * 
+ *
  * @author Marco Steybe
  */
 public class RepositoryContextListener implements ServletContextListener {
@@ -44,9 +44,10 @@ public class RepositoryContextListener implements ServletContextListener {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)
      */
+    @Override
     public void contextInitialized(ServletContextEvent event) {
         ServletContext ctx = event.getServletContext();
 
@@ -87,9 +88,10 @@ public class RepositoryContextListener implements ServletContextListener {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)
      */
+    @Override
     public void contextDestroyed(ServletContextEvent event) {
         LOG.info("Fosstrak EPCIS Repository application shut down\n######################################");
         LogFactory.releaseAll();

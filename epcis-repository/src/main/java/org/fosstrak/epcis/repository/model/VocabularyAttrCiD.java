@@ -26,24 +26,25 @@ import java.io.Serializable;
 
 /**
  * A vocabulary type for representing business step identifiers Attributes
- * 
+ *
  * @author Nikos Kefalakis (nkef)
  */
 public class VocabularyAttrCiD implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -5025973585282842235L;
-	
+
 	private String privateID;
 	private Long id;
 	private String attribute;
-	
+
 	public VocabularyAttrCiD() {
 		this.privateID = java.util.UUID.randomUUID().toString();
 	}
 
+  @Override
 	public int hashCode() {
 		return privateID.hashCode();
 	}

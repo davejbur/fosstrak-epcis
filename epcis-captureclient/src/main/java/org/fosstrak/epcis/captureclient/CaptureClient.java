@@ -62,7 +62,7 @@ import org.fosstrak.epcis.utils.AuthenticationType;
  * be sent to the capture interface using HTTP POST requests. This client
  * supports the following authentication options: HTTP BASIC AUTH and HTTPS with
  * client certificate.
- * 
+ *
  * @author Marco Steybe
  */
 public class CaptureClient implements X509TrustManager, HostnameVerifier {
@@ -87,7 +87,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
 
     /**
      * Constructs a new CaptureClient using the given URL and no authentication.
-     * 
+     *
      * @param url
      *            The URL to the EPCIS Capture Interface.
      */
@@ -116,7 +116,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
      * <td>password</td>
      * </tr>
      * </table>
-     * 
+     *
      * @param url
      *            The URL to the EPCIS Capture Interface.
      * @param authOptions
@@ -162,7 +162,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
      * interface. Please see the <a
      * href="http://www.fosstrak.org/epcis/docs/user-guide.html">Fosstrak
      * User-Guide</a> for more information and code samples.
-     * 
+     *
      * @param xmlStream
      *            An input stream providing an EPCISDocument with a list of
      *            events.
@@ -182,7 +182,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
      * Sends the given XML String to the EPCIS capture interface. Please see the
      * <a href="http://www.fosstrak.org/epcis/docs/user-guide.html">Fosstrak
      * User-Guide</a> for more information and code samples.
-     * 
+     *
      * @param eventXml
      *            The XML String with the EPCISDocument and a list of events.
      * @return The HTTP response code from the repository.
@@ -201,7 +201,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
      * Sends the given EPCIS Document to the EPCIS capture interface. Please see
      * the <a href="http://www.fosstrak.org/epcis/docs/user-guide.html">Fosstrak
      * User-Guide</a> for more information and code samples.
-     * 
+     *
      * @param epcisDoc
      *            The EPCIS Document with a list of events.
      * @return The HTTP response code from the repository.
@@ -236,7 +236,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
      * Fosstrak EPCIS capture interface. It deletes all event data in the EPCIS
      * database. This operation is only allowed if the corresponding property is
      * set in the repository's configuration.
-     * 
+     *
      * @return The response from the capture module.
      * @throws CaptureClientException
      *             If a communication error occurred.
@@ -256,7 +256,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
 
     /**
      * Opens a connection to the EPCIS capture interface.
-     * 
+     *
      * @param contentType
      *            The HTTP content-type, e.g., <code>text/xml</code>
      * @return The HTTP connection object.
@@ -347,7 +347,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
     /**
      * Send data to the repository's capture operation using HTTP POST. The data
      * will be sent using the given content-type.
-     * 
+     *
      * @param data
      *            The data to send.
      * @return The HTTP response message
@@ -368,7 +368,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
     /**
      * Send data to the repository's capture operation using HTTP POST. The data
      * will be sent using the given content-type.
-     * 
+     *
      * @param data
      *            The data to send.
      * @return The HTTP response message from the repository.
@@ -405,12 +405,15 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
     // you point it at. This is probably OK for the usage for which this program
     // is intended, but is hardly a robust implementation.
 
+    @Override
     public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
     }
 
+    @Override
     public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
     }
 
+    @Override
     public X509Certificate[] getAcceptedIssuers() {
         return null;
     }
@@ -419,6 +422,7 @@ public class CaptureClient implements X509TrustManager, HostnameVerifier {
     // authenticity of any DNS name it is given. Again, probably OK for the
     // nature of this client, but generally not a good idea.
 
+    @Override
     public boolean verify(String arg0, SSLSession arg1) {
         return true;
     }

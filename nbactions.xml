@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-Check updated deps</actionName>
+            <displayName>Check updated deps</displayName>
+            <goals>
+                <goal>versions:display-dependency-updates</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-Check updated plugins</actionName>
+            <displayName>Check updated plugins</displayName>
+            <goals>
+                <goal>versions:display-plugin-updates</goal>
+            </goals>
+        </action>
+    </actions>

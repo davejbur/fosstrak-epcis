@@ -52,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
  * This class redirects the calls received from the Web service stack to the
  * underlying QueryOperationsModule and ensures that any uncaught exception is
  * properly catched and wrapped into an ImplementationExceptionResponse.
- * 
+ *
  * @author Marco Steybe
  */
 //@WebService(endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType" /*, portName="EPCISServicePortType", serviceName="QueryOperationsWebService"*/)
@@ -72,6 +72,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getQueryNames(org.fosstrak.epcis.model.EmptyParms)
      */
+    @Override
     public ArrayOfString getQueryNames(EmptyParms empty) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse {
         ArrayOfString aos = new ArrayOfString();
@@ -82,6 +83,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getStandardVersion(org.fosstrak.epcis.model.EmptyParms)
      */
+    @Override
     public String getStandardVersion(EmptyParms empty) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse {
         return queryModule.getStandardVersion();
@@ -90,6 +92,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getSubscriptionIDs(org.fosstrak.epcis.model.GetSubscriptionIDs)
      */
+    @Override
     public ArrayOfString getSubscriptionIDs(GetSubscriptionIDs req) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, NoSuchNameExceptionResponse {
         ArrayOfString aos = new ArrayOfString();
@@ -100,6 +103,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getVendorVersion(org.fosstrak.epcis.model.EmptyParms)
      */
+    @Override
     public String getVendorVersion(EmptyParms empty) throws ImplementationExceptionResponse, SecurityExceptionResponse,
             ValidationExceptionResponse {
         return queryModule.getVendorVersion();
@@ -108,6 +112,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#poll(org.fosstrak.epcis.model.Poll)
      */
+    @Override
     public QueryResults poll(Poll poll) throws ImplementationExceptionResponse, QueryTooComplexExceptionResponse,
             QueryTooLargeExceptionResponse, SecurityExceptionResponse, ValidationExceptionResponse,
             NoSuchNameExceptionResponse, QueryParameterExceptionResponse {
@@ -144,6 +149,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#subscribe(org.fosstrak.epcis.model.Subscribe)
      */
+    @Override
     public VoidHolder subscribe(Subscribe subscribe) throws DuplicateSubscriptionExceptionResponse,
             ImplementationExceptionResponse, QueryTooComplexExceptionResponse, SecurityExceptionResponse,
             InvalidURIExceptionResponse, ValidationExceptionResponse, SubscribeNotPermittedExceptionResponse,
@@ -190,6 +196,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#unsubscribe(org.fosstrak.epcis.model.Unsubscribe)
      */
+    @Override
     public VoidHolder unsubscribe(Unsubscribe unsubscribe) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, NoSuchSubscriptionExceptionResponse {
         // log and wrap any error that is not one of the expected exceptions

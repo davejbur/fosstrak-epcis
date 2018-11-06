@@ -84,7 +84,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 /**
  * Implements a subscription to a query. Created upon using subscribe() on the
  * querying interface side.
- * 
+ *
  * @author Alain Remund
  * @author Arthur van Dorp
  * @author Marco Steybe
@@ -108,7 +108,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
 
     /**
      * Constructor to be used when recreating from storage.
-     * 
+     *
      * @param subscriptionID
      *            subscriptionID.
      * @param queryParams
@@ -150,7 +150,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
      * TODO: This is a back-end method: move this method to the
      * QueryOperationsBackend and delegate to it (thus we would need a reference
      * to the QueryOperationsBackend in this class).
-     * 
+     *
      * @param lastTimeExecuted
      *            The new lastTimeExecuted.
      */
@@ -198,7 +198,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
     /**
      * Updates or adds the 'GE_recordTime' query parameter in the given query
      * parameter array and sets its value to the given time.
-     * 
+     *
      * @param queryParams
      *            The (old) query parameter array.
      * @param initialRecordTime
@@ -339,6 +339,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void callbackResults(final QueryResults results) {
         callbackObject(results);
     }
@@ -346,6 +347,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void callbackImplementationException(ImplementationException ie) {
         callbackObject(ie);
     }
@@ -353,6 +355,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void callbackQueryTooLargeException(QueryTooLargeException qtle) {
         callbackObject(qtle);
     }
@@ -361,7 +364,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
      * Serializes and sends the given object back to the client. The Object must
      * be an instance of QueryResults, QueryTooLargeException, or
      * ImplementationException.
-     * 
+     *
      * @param o
      *            The object to be sent back to the client. An instance of
      *            QueryResults, QueryTooLargeException, or
@@ -451,7 +454,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
 
     /**
      * Marshals the given EPCIS query document into it's XML representation.
-     * 
+     *
      * @param epcisDoc
      *            The EPCISQueryDocumentType to marshal.
      * @return The marshaled EPCISQueryDocumentType XML String.
@@ -471,7 +474,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
 
     /**
      * Sends the given data String to the specified URL.
-     * 
+     *
      * @param url
      *            The URL to send the data to.
      * @param data
@@ -522,7 +525,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
      * the Java runtime's trust store, or, if you want to disable the validation
      * of certificates for testing purposes, use
      * {@link getAllTrustingConnection(URL)}.
-     * 
+     *
      * @param url
      *            The URL on which a connection will be opened.
      * @return A HttpURLConnection connection object.
@@ -537,7 +540,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
      * Retrieves an "all-trusting" HTTP URL connection object, by disabling the
      * validation of certificates and overriding the default trust manager with
      * one that trusts all certificates.
-     * 
+     *
      * @param url
      *            The URL on which a connection will be opened.
      * @return A HttpURLConnection connection object.
@@ -547,13 +550,16 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
     private HttpURLConnection getAllTrustingConnection(URL url) throws IOException {
         // Create a trust manager that does not validate certificate chains
         TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+            @Override
             public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                 return null;
             }
 
+            @Override
             public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {
             }
 
+            @Override
             public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {
             }
         } };
@@ -581,7 +587,7 @@ public class QuerySubscription implements EpcisQueryCallbackInterface, Serializa
     /**
      * Loads the application's properties file from the class path if it has not
      * already done so.
-     * 
+     *
      * @return A populated Properties instance.
      */
     private Properties getProperties() {

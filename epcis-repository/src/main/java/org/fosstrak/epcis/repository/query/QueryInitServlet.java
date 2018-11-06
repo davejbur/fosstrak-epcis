@@ -51,7 +51,7 @@ import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
  * Note: this servlet is only required if you do not wire the application with
  * Spring! To use this servlet, and bypass Spring, replace
  * <code>WEB-INF/web.xml</code> with <code>WEB-INF/non-spring-web.xml</code>.
- * 
+ *
  * @author Marco Steybe
  */
 public class QueryInitServlet extends CXFNonSpringServlet {
@@ -72,9 +72,10 @@ public class QueryInitServlet extends CXFNonSpringServlet {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.apache.cxf.transport.servlet.CXFNonSpringServlet#loadBus(javax.servlet.ServletConfig)
      */
+    @Override
     public void loadBus(ServletConfig servletConfig) throws ServletException {
 //    public void loadBus(ServletConfig servletConfig) {
         super.loadBus(servletConfig);
@@ -115,7 +116,7 @@ public class QueryInitServlet extends CXFNonSpringServlet {
     /**
      * Loads the application property file and populates a java.util.Properties
      * instance.
-     * 
+     *
      * @param servletConfig
      *            The ServletConfig used to locate the application property
      *            file.
@@ -146,7 +147,7 @@ public class QueryInitServlet extends CXFNonSpringServlet {
 
     /**
      * Loads the data source from the application context via JNDI.
-     * 
+     *
      * @param jndiName
      *            The name of the JNDI data source holding the connection to the
      *            database.

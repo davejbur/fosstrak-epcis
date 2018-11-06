@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 /**
  * Implements an example event object for the EPCIS Query Interface Client.
- * 
+ *
  * @author David Gubler
  */
 public class CaptureEvent {
@@ -266,7 +266,7 @@ public class CaptureEvent {
 
     /**
      * Sets the business transaction.
-     * 
+     *
      * @param t
      *            The type of the business transaction.
      * @param id
@@ -362,10 +362,10 @@ public class CaptureEvent {
     /**
      * A BusinessTransaction conists of two elements, the BizTransTypeID and the
      * BizTransID which are Vocabularies.
-     * 
+     *
      * @author Alain Remund
      */
-    public class BizTransaction {
+    public static class BizTransaction {
         /**
          * The private Variable for the BizTransTypeID.
          */
@@ -378,7 +378,7 @@ public class CaptureEvent {
 
         /**
          * Constructor for a new BusinessTransaction.
-         * 
+         *
          * @param aType
          *            with the value of the BizTransTypeID.
          * @param aId

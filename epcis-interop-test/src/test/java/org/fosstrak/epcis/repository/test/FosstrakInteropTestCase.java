@@ -37,7 +37,7 @@ import org.dbunit.operation.DatabaseOperation;
  * is reset with a predefined set of data. If you want to execute a database
  * operation other that {@code DatabaseOperation.CLEAN_INSERT} then you should
  * override {@link #getSetUpOperation()}.
- * 
+ *
  * @author Marco Steybe
  */
 public class FosstrakInteropTestCase extends JdbcBasedDBTestCase {
@@ -50,6 +50,7 @@ public class FosstrakInteropTestCase extends JdbcBasedDBTestCase {
         super(name);
     }
 
+    @Override
     protected void setUp() throws Exception {
         IDatabaseConnection connection = getConnection();
         IDataSet dataSet = getDataSet();
@@ -65,7 +66,7 @@ public class FosstrakInteropTestCase extends JdbcBasedDBTestCase {
             connection.close();
         }
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         // noop
@@ -77,6 +78,7 @@ public class FosstrakInteropTestCase extends JdbcBasedDBTestCase {
         config.setProperty("http://www.dbunit.org/properties/datatypeFactory", new MySqlDataTypeFactory());
     }
 
+    @Override
     protected IDataSet getDataSet() throws Exception {
         InputStream is = new FileInputStream("src/test/resources/dbunit/epcis_test_data.xml");
         return new XmlDataSet(is);
@@ -101,7 +103,7 @@ public class FosstrakInteropTestCase extends JdbcBasedDBTestCase {
     protected String getUsername() {
         return "epcis";
     }
-    
+
     @Override
     protected DatabaseOperation getSetUpOperation() throws Exception {
         return DatabaseOperation.NONE;

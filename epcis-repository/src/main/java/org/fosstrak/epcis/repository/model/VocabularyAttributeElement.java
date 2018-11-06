@@ -26,16 +26,16 @@ import java.io.Serializable;
 
 /**
  * A base class for vocabulary attribute elements.
- * 
+ *
  * @author Nikos Kefalakis (nkef)
  */
 public abstract class VocabularyAttributeElement implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3825662827697962041L;
-	
+
 	private String privateID;
 	private String value;
 	private VocabularyAttrCiD vocabularyAttrCiD;
@@ -45,6 +45,7 @@ public abstract class VocabularyAttributeElement implements Serializable {
 		this.privateID = java.util.UUID.randomUUID().toString();
 	}
 
+  @Override
 	public int hashCode() {
 		return privateID.hashCode();
 	}

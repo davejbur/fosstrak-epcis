@@ -81,7 +81,7 @@ import org.fosstrak.epcis.utils.AuthenticationType;
  * This query client makes calls against the EPCIS query control interface and
  * also provides some convenience methods for polling and subscribing queries
  * given in XML form.
- * 
+ *
  * @author Marco Steybe
  */
 public class QueryControlClient implements QueryControlInterface, X509TrustManager {
@@ -130,7 +130,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
      * authentication options. You can also configure the service through
      * {@link #configureService(URL, Object[])} prior to calling any
      * QueryControlInterface service method.
-     * 
+     *
      * @param url
      *            the URL of the repository, or <code>null</code> if a default
      *            value should be loaded.
@@ -212,7 +212,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
     /**
      * Configures the service to communicate with the given endpoint address
      * using the desired authentication method.
-     * 
+     *
      * @param endpointAddress
      *            The endpoint address this client will communicate to.
      * @param authenticationOptions
@@ -335,7 +335,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
         ClientOnlyHTTPTransportFactory httpTransport = new ClientOnlyHTTPTransportFactory();
 //        HTTPTransportFactory httpTransport = new HTTPTransportFactory();
         // httpTransport = new ServletTransportFactory();
-        
+
         //FIX - setbus seems to have disappeared in CXF 3.0 with no documentation on where it's gone!
         httpTransport.setBus(bus);
         List<String> transportIds = Arrays.asList(new String[] {
@@ -352,21 +352,25 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
     // you point it at. This is probably OK for the usage for which this program
     // is intended, but is hardly a robust implementation.
 
+    @Override
     public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
     }
 
+    @Override
     public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
     }
 
+    @Override
     public X509Certificate[] getAcceptedIssuers() {
         return null;
     }
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryControlInterface#getQueryNames()
      */
+    @Override
     public List<String> getQueryNames() throws ImplementationExceptionResponse, SecurityExceptionResponse,
             ValidationExceptionResponse {
         if (!serviceConfigured) {
@@ -378,9 +382,10 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryControlInterface#getStandardVersion()
      */
+    @Override
     public String getStandardVersion() throws ImplementationExceptionResponse, SecurityExceptionResponse,
             ValidationExceptionResponse {
         if (!serviceConfigured) {
@@ -392,9 +397,10 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryControlInterface#getSubscriptionIds(java.lang.String)
      */
+    @Override
     public List<String> getSubscriptionIds(final String queryName) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, NoSuchNameExceptionResponse {
         if (!serviceConfigured) {
@@ -408,9 +414,10 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryControlInterface#getVendorVersion()
      */
+    @Override
     public String getVendorVersion() throws ImplementationExceptionResponse, SecurityExceptionResponse,
             ValidationExceptionResponse {
         if (!serviceConfigured) {
@@ -422,9 +429,10 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryControlInterface#poll(org.fosstrak.epcis.model.Poll)
      */
+    @Override
     public QueryResults poll(final Poll poll) throws ImplementationExceptionResponse, QueryTooComplexExceptionResponse,
             QueryTooLargeExceptionResponse, SecurityExceptionResponse, ValidationExceptionResponse,
             NoSuchNameExceptionResponse, QueryParameterExceptionResponse {
@@ -439,7 +447,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
      * Parses the query given in its XML representation and sends it to the
      * Query Operations Module. Same operation as the method with the
      * InputStream argument.
-     * 
+     *
      * @param query
      *            The query in its XML form.
      * @return The QueryResults as it is returned from the repository's Query
@@ -465,7 +473,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
     /**
      * Parses the query given in its XML representation and sends it to the
      * Query Operations Module.
-     * 
+     *
      * @param queryStream
      *            The query in its XML form.
      * @return The QueryResults as it is returned from the repository's Query
@@ -506,9 +514,10 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryControlInterface#subscribe(org.fosstrak.epcis.model.Subscribe)
      */
+    @Override
     public void subscribe(final Subscribe subscribe) throws DuplicateSubscriptionExceptionResponse,
             ImplementationExceptionResponse, QueryTooComplexExceptionResponse, SecurityExceptionResponse,
             InvalidURIExceptionResponse, ValidationExceptionResponse, SubscribeNotPermittedExceptionResponse,
@@ -524,7 +533,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
      * Parses the query given in its XML representation and sends it to the
      * Query Operations Module. Same operation as the method with the
      * InputStream argument.
-     * 
+     *
      * @param query
      *            The query in its XML form.
      * @throws ServiceException
@@ -553,7 +562,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
     /**
      * Parses the query given in its XML representation and sends it to the
      * Query Operations Module.
-     * 
+     *
      * @param query
      *            The query in its XML form.
      * @throws RemoteException
@@ -595,9 +604,10 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see org.fosstrak.epcis.queryclient.QueryControlInterface#unsubscribe(java.lang.String)
      */
+    @Override
     public void unsubscribe(final String subscriptionId) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, NoSuchSubscriptionExceptionResponse {
         if (!serviceConfigured) {
@@ -612,7 +622,7 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
     /**
      * Parses the XML from the given input stream as an Unsubscribe object and
      * unsubscribes the specified subscription ID from the repository.
-     * 
+     *
      * @param unsubscribeIs
      * @throws ImplementationExceptionResponse
      * @throws SecurityExceptionResponse

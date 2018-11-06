@@ -41,14 +41,17 @@ public class MultipartFormDataFilter implements Filter {
 
     private static final Log LOG = LogFactory.getLog(CaptureOperationsServlet.class);
 
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         // nothing to do
     }
 
+    @Override
     public void destroy() {
         // nothing to do
     }
 
+    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         // check that we have a file upload request
         boolean isMultipart = ServletFileUpload.isMultipartContent((HttpServletRequest) req);
@@ -92,7 +95,7 @@ public class MultipartFormDataFilter implements Filter {
         }
     }
 
-    private class WrappedServletInputStream extends ServletInputStream {
+    private static class WrappedServletInputStream extends ServletInputStream {
         private InputStream is;
         public WrappedServletInputStream(InputStream is) {
             this.is = is;

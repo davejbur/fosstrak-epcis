@@ -37,7 +37,7 @@ public class CallbackTriggerTest extends TestCase {
 
     /**
      * Tests if setting the initialRecordTime parameter has effect.
-     * 
+     *
      * @throws Exception
      *             Any exception, caught by the JUnit framework.
      */
@@ -74,7 +74,7 @@ public class CallbackTriggerTest extends TestCase {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see junit.framework.TestCase#tearDown()
      */
     @Override
@@ -87,7 +87,7 @@ public class CallbackTriggerTest extends TestCase {
         new CaptureClient().dbReset();
     }
 
-    private class CaptureTrigger extends Thread {
+    private static class CaptureTrigger extends Thread {
 
         private StringBuilder event = new StringBuilder();
 
@@ -119,7 +119,7 @@ public class CallbackTriggerTest extends TestCase {
 
         /*
          * (non-Javadoc)
-         * 
+         *
          * @see java.lang.Thread#run()
          */
         @Override

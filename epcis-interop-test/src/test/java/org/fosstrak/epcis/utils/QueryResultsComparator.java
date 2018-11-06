@@ -37,7 +37,7 @@ import org.w3c.dom.Node;
 
 /**
  * Utility class providing operations to compare QueryResults objects.
- * 
+ *
  * @author Marco Steybe
  */
 public final class QueryResultsComparator {
@@ -58,7 +58,7 @@ public final class QueryResultsComparator {
      * <code>true</code> if they are identical, <code>false</code>
      * otherwise. If the two instances are not similar, it prints information to
      * System.out.
-     * 
+     *
      * @param expResults
      *            The expected QueryResults object.
      * @param actResults
@@ -88,6 +88,7 @@ public final class QueryResultsComparator {
             ignore.add(DifferenceConstants.COMMENT_VALUE);
         }
 
+        @Override
         public int differenceFound(Difference difference) {
             // ignore <recordTime> presence
             if (difference.equals(DifferenceConstants.CHILD_NODE_NOT_FOUND)
@@ -118,6 +119,7 @@ public final class QueryResultsComparator {
          * @see org.custommonkey.xmlunit.DifferenceListener#skippedComparison(org.w3c.dom.Node,
          *      org.w3c.dom.Node)
          */
+        @Override
         public void skippedComparison(Node n1, Node n2) {
         }
     }

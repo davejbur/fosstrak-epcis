@@ -41,7 +41,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Test for 'reportIfEmpty' tag (SE48).
- * 
+ *
  * @author Marco Steybe
  */
 public class CallbackReportIfEmptyTest extends TestCase {
@@ -55,7 +55,7 @@ public class CallbackReportIfEmptyTest extends TestCase {
     /**
      * Tests that no response is provided if the reportIfEmpty tag is set to
      * false.
-     * 
+     *
      * @throws Exception
      *             Any exception, caught by the JUnit framework.
      */
@@ -113,7 +113,7 @@ public class CallbackReportIfEmptyTest extends TestCase {
 
     /**
      * Parses a string into an XML Document.
-     * 
+     *
      * @param resp
      *            The string to be parsed.
      * @return The parsed XML Document.
@@ -136,6 +136,7 @@ public class CallbackReportIfEmptyTest extends TestCase {
      * {@inheritDoc}
      * @see junit.framework.TestCase#tearDown()
      */
+    @Override
     protected void tearDown() throws Exception {
         try {
             client.unsubscribe("QuerySE48-1");

@@ -334,8 +334,8 @@
         <artifactId>tomcat-maven-plugin</artifactId>
         <version>1.1</version -->
         <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat8-maven-plugin</artifactId>
-        <version>3.0-r1756463</version>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
         <configuration>
           <server>tomcat-manager</server>
           <!-- uncomment if you use Tomcat 7
@@ -389,6 +389,26 @@
             </property>
           </systemProperties -->
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>default-testResources</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>testResources</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

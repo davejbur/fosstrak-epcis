@@ -39,7 +39,7 @@ import org.w3c.dom.Element;
 /**
  * This is a helper class which encapsulates common functionality used within
  * the capture client classes.
- * 
+ *
  * @author Marco Steybe
  */
 public class CaptureClientHelper {
@@ -78,8 +78,8 @@ public class CaptureClientHelper {
         ObjectEvent(0, "Object event"), AggregationEvent(1, "Aggregation event"), QuantityEvent(2, "Quantity event"),
         TransactionEvent(3, "Transaction event");
 
-        private int guiIndex;
-        private String guiName;
+        private final int guiIndex;
+        private final String guiName;
 
         private EpcisEventType(int guiIndex, String guiName) {
             this.guiIndex = guiIndex;
@@ -111,7 +111,7 @@ public class CaptureClientHelper {
     /**
      * Returns the time zone designator in a ISO6601-compliant format from the
      * given <code>Calendar</code> value.
-     * 
+     *
      * @param cal
      *            The Calendar to be formatted.
      * @return The time zone designator from the given Calendar.
@@ -133,7 +133,7 @@ public class CaptureClientHelper {
     /**
      * Formats a <code>Calendar</code> value into an ISO8601-compliant date/time
      * string.
-     * 
+     *
      * @param cal
      *            The time value to be formatted into a date/time string.
      * @return The formatted date/time string.
@@ -187,11 +187,11 @@ public class CaptureClientHelper {
     /**
      * Implements a class that holds examples for the EPCIS Capture Interface
      * Client.
-     * 
+     *
      * @author David Gubler
      */
     public static final class ExampleEvents {
- 
+
         private static List<CaptureEvent> examples = null;
 
         /**
@@ -369,7 +369,7 @@ public class CaptureClientHelper {
             ex.setEpcList("urn:epc:id:sgtin:0057000.678930.5003 urn:epc:id:sgtin:0057000.678930.5004");
             examples.add(ex);
         }
-        
+
         public static List<CaptureEvent> getExamples() {
             if (examples == null) {
                 initEvents();
@@ -380,7 +380,7 @@ public class CaptureClientHelper {
 
     /**
      * Loads ImageIcon from either JAR or filesystem.
-     * 
+     *
      * @param filename
      *            The name of the file holding the image icon.
      * @return The ImageIcon.
@@ -406,7 +406,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given quantity value as {@code <quantity>} element to the XML
      * document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <quantity>} element from.
      * @param root
@@ -430,7 +430,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given epcClass value as {@code <epcClass>} element to the XML
      * document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <epcClass>} element from.
      * @param root
@@ -448,7 +448,7 @@ public class CaptureClientHelper {
     /**
      * Adds the EPCs from the given list of childEPCs as {@code <epc>} elements
      * inside an {@code <childEPCs>} element to the XML document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <epc>} and {@code
      *            <childEPCs>} element from.
@@ -477,7 +477,7 @@ public class CaptureClientHelper {
      * Adds the given mapping of business transactions ([business transaction
      * IDs] -> [business transaction types]) as part of a {@code
      * <bizTransactionList>} element to the XML document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <bizTransactionList>}
      *            element from.
@@ -511,7 +511,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given bizLocation as {@code <id>} element inside a {@code
      * <bizLocation>} element to the XML document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <id>} and {@code
      *            <bizLocation>} elements from.
@@ -536,7 +536,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given readPoint as {@code <id>} element inside a {@code
      * <readPoint>} element to the XML document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <id>} and {@code
      *            <readPoint>} elements from.
@@ -561,7 +561,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given disposition value as {@code <disposition>} element to the
      * XML document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <disposition>} element
      *            from.
@@ -580,7 +580,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given bizStep value as {@code <bizStep>} element to the XML
      * document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <bizStep>} element from.
      * @param root
@@ -598,7 +598,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given action value as {@code <action>} element to the XML
      * document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <action>} element from.
      * @param root
@@ -616,7 +616,7 @@ public class CaptureClientHelper {
     /**
      * Adds the EPCs from the given epcList as {@code <epc>} elements inside an
      * {@code <epcList>} element to the XML document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <epc>} and {@code
      *            <epcList>} element from.
@@ -644,7 +644,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given parentID value as {@code <parentID>} element to the XML
      * document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <parentID>} element from.
      * @param root
@@ -662,7 +662,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given eventTime value as {@code <eventTime>} element to the XML
      * document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <eventTime>} element from.
      * @param root
@@ -680,7 +680,7 @@ public class CaptureClientHelper {
     /**
      * Adds the given eventTimeZoneOffset value as {@code <eventTimeZoneOffset>}
      * element to the XML document.
-     * 
+     *
      * @param document
      *            The Document to generate the {@code <eventTimeZoneOffset>}
      *            element from.

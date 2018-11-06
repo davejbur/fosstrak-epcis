@@ -31,7 +31,7 @@ import org.fosstrak.epcis.soap.NoSuchSubscriptionExceptionResponse;
 
 /**
  * Test for getSubscriptionID() (SE46).
- * 
+ *
  * @author Marco Steybe
  */
 public class SubscriptionIdsTest extends TestCase {
@@ -45,7 +45,7 @@ public class SubscriptionIdsTest extends TestCase {
     /**
      * Tests if the getSubscriptionIDs() function returns the correct values for
      * two subscribed queries.
-     * 
+     *
      * @throws Exception
      *             Any exception, caught by the JUnit framework.
      */
@@ -69,9 +69,10 @@ public class SubscriptionIdsTest extends TestCase {
 
     /**
      * {@inheritDoc}
-     * 
+     *
      * @see junit.framework.TestCase#tearDown()
      */
+    @Override
     protected void tearDown() throws Exception {
         try {
             client.unsubscribe("QuerySE46-1");

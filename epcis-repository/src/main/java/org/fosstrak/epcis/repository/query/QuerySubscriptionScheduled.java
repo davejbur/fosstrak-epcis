@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Special case of Subscription (from subscribe() on query interface) where the
  * subscription is scheduled.
- * 
+ *
  * @author Alain Remund
  * @author Arthur van Dorp
  */
@@ -59,7 +59,7 @@ public class QuerySubscriptionScheduled extends QuerySubscription implements Not
 
     /**
      * Constructor to be used when recreating from storage.
-     * 
+     *
      * @param subscriptionID
      *            The subscription ID.
      * @param queryParams
@@ -95,7 +95,7 @@ public class QuerySubscriptionScheduled extends QuerySubscription implements Not
 
     /**
      * Starts a Timer to get this query executed in specific time intervals.
-     * 
+     *
      * @throws ImplementationException
      *             If the next scheduled date cannot be evaluated.
      */
@@ -119,6 +119,7 @@ public class QuerySubscriptionScheduled extends QuerySubscription implements Not
     /**
      * The Object has definitely been destroyed. This may take a while.
      */
+    @Override
     protected void finalize() {
         LOG.debug("A subscribed query has been garbage collected.");
     }
@@ -126,7 +127,7 @@ public class QuerySubscriptionScheduled extends QuerySubscription implements Not
     /**
      * This method is handles a notification when the Timer for the schedule
      * times out.
-     * 
+     *
      * @see javax.management.NotificationListener#handleNotification(javax.management.Notification,
      *      java.lang.Object)
      * @param pNotification
@@ -135,6 +136,7 @@ public class QuerySubscriptionScheduled extends QuerySubscription implements Not
      *            A Timer stating the time when the Notification should be
      *            invoked.
      */
+    @Override
     public void handleNotification(final Notification pNotification, final Object pHandback) {
         if (pHandback == null) {
             LOG.error("The timer stating the next scheduled query execution time is null!");
@@ -153,7 +155,7 @@ public class QuerySubscriptionScheduled extends QuerySubscription implements Not
 
     /**
      * Determines the next scheduled execution time for this subscribed query.
-     * 
+     *
      * @param timer
      *            The Timer to set the next scheduled time.
      * @throws IllegalArgumentException
