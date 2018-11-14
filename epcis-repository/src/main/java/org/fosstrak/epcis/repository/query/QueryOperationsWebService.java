@@ -21,6 +21,8 @@
 package org.fosstrak.epcis.repository.query;
 
 //import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import org.fosstrak.epcis.model.ArrayOfString;
 import org.fosstrak.epcis.model.EmptyParms;
 import org.fosstrak.epcis.model.GetSubscriptionIDs;
@@ -47,6 +49,7 @@ import org.fosstrak.epcis.soap.SubscriptionControlsExceptionResponse;
 import org.fosstrak.epcis.soap.ValidationExceptionResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * This class redirects the calls received from the Web service stack to the
@@ -55,7 +58,9 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Marco Steybe
  */
+@Service("EPCISServicePortType")
 //@WebService(endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType" /*, portName="EPCISServicePortType", serviceName="QueryOperationsWebService"*/)
+@WebService
 public class QueryOperationsWebService implements EPCISServicePortType {
 
     private static final Log LOG = LogFactory.getLog(QueryOperationsWebService.class);
@@ -72,6 +77,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getQueryNames(org.fosstrak.epcis.model.EmptyParms)
      */
+    @WebMethod
     @Override
     public ArrayOfString getQueryNames(EmptyParms empty) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse {
@@ -83,6 +89,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getStandardVersion(org.fosstrak.epcis.model.EmptyParms)
      */
+    @WebMethod
     @Override
     public String getStandardVersion(EmptyParms empty) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse {
@@ -92,6 +99,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getSubscriptionIDs(org.fosstrak.epcis.model.GetSubscriptionIDs)
      */
+    @WebMethod
     @Override
     public ArrayOfString getSubscriptionIDs(GetSubscriptionIDs req) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, NoSuchNameExceptionResponse {
@@ -103,6 +111,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getVendorVersion(org.fosstrak.epcis.model.EmptyParms)
      */
+    @WebMethod
     @Override
     public String getVendorVersion(EmptyParms empty) throws ImplementationExceptionResponse, SecurityExceptionResponse,
             ValidationExceptionResponse {
@@ -112,6 +121,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#poll(org.fosstrak.epcis.model.Poll)
      */
+    @WebMethod
     @Override
     public QueryResults poll(Poll poll) throws ImplementationExceptionResponse, QueryTooComplexExceptionResponse,
             QueryTooLargeExceptionResponse, SecurityExceptionResponse, ValidationExceptionResponse,
@@ -149,6 +159,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#subscribe(org.fosstrak.epcis.model.Subscribe)
      */
+    @WebMethod
     @Override
     public VoidHolder subscribe(Subscribe subscribe) throws DuplicateSubscriptionExceptionResponse,
             ImplementationExceptionResponse, QueryTooComplexExceptionResponse, SecurityExceptionResponse,
@@ -196,6 +207,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#unsubscribe(org.fosstrak.epcis.model.Unsubscribe)
      */
+    @WebMethod
     @Override
     public VoidHolder unsubscribe(Unsubscribe unsubscribe) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, NoSuchSubscriptionExceptionResponse {

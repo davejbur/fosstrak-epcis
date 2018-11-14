@@ -106,7 +106,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.1</version>
+        <version>3.0.0-M1</version>
         <configuration>
           <!-- by default, exclude all tests (see note above) -->
           <excludes>

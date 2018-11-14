@@ -14,4 +14,11 @@
                 <goal>versions:display-plugin-updates</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-Create sources</actionName>
+            <displayName>Create sources</displayName>
+            <goals>
+                <goal>cxf-codegen:wsdl2java</goal>
+            </goals>
+        </action>
     </actions>

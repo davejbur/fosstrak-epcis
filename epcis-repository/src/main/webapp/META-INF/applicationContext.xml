@@ -3,19 +3,26 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xmlns:jaxws="http://cxf.apache.org/jaxws"
     xmlns:cxf="http://cxf.apache.org/core"
+    xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="
-      http://www.springframework.org/schema/beans
-      http://www.springframework.org/schema/beans/spring-beans.xsd
-      http://cxf.apache.org/core
-      http://cxf.apache.org/schemas/core.xsd
-      http://cxf.apache.org/jaxws
-      http://cxf.apache.org/schemas/jaxws.xsd">
+                        http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd
+                        http://cxf.apache.org/core
+                        http://cxf.apache.org/schemas/core.xsd
+                        http://cxf.apache.org/jaxws
+                        http://cxf.apache.org/schemas/jaxws.xsd
+                        ">
 
   <!-- beans and configurations defined in the cxf jars -->
   <import resource="classpath:META-INF/cxf/cxf.xml" />
-  <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
-  <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+  <!-- not needed 2.4.0 & newer -->
+  <!-- import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" / -->
+  <!-- import resource="classpath:META-INF/cxf/cxf-servlet.xml" / -->
 
+  <context:annotation-config />
+  
   <!-- post-processor which replaces placeholders like ${test} with values from property files -->
   <bean id="dataPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
@@ -47,8 +54,9 @@
   -->
 
   <!-- Hibernate session factory -->
+  <!-- bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" -->
   <!-- bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" -->
-  <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+  <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
     <!-- all Hibernate properties are configured in hibernate.cfg.xml -->
     <property name="configLocation" value="classpath:hibernate.cfg.xml" />
   </bean>
@@ -66,9 +74,10 @@
     <property name="maxQueryTime" value="${maxQueryExecutionTime}" />
     <property name="triggerConditionSeconds" value="${trigger.condition.check.sec}" />
     <property name="triggerConditionMinutes" value="${trigger.condition.check.min}" />
-    <property name="servletContext">
+    <!-- not needed for Spring 3+ -->
+    <!-- property name="servletContext">
       <bean class="org.springframework.web.context.support.ServletContextFactoryBean" />
-    </property>
+    </property -->
     <property name="backend">
       <bean class="org.fosstrak.epcis.repository.query.QueryOperationsBackendSQL" />
     </property>

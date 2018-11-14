@@ -16,14 +16,30 @@
   <modelVersion>4.0.0</modelVersion>
   <name>epcis-queryclient</name>
 
+  <!-- problem here is that httptransport has changed -->
   <properties>
     <!-- original -->
     <lib-cxf-version>2.2.12</lib-cxf-version>
     <!-- tried -->
+    <!-- lib-cxf-version>2.3.11</lib-cxf-version -->
     <!-- lib-cxf-version>2.7.18</lib-cxf-version -->
     <!-- lib-cxf-version>3.0.16</lib-cxf-version -->
+    <!-- lib-cxf-version>3.2.7</lib-cxf-version -->
+    <!-- trying -->
+    <!-- lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version -->
   </properties>
 
+  <!-- CXF version 3.3.0+ needed for JDK11 -->
+  <pluginRepositories>
+    <pluginRepository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>http://repository.apache.org/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
 
   <!-- =========================================================== -->
   <!-- Dependencies                                                -->
@@ -330,7 +346,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>2.22.1</version>
+        <version>3.0.0-M1</version>
       </plugin>
     </plugins>
   </reporting>

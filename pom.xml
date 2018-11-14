@@ -53,6 +53,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- maven.compiler.release>1.8</maven.compiler.release -->
+        <lib-cxf-version>3.2.7</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -125,6 +126,7 @@
         <!-- maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target -->
         <maven.compiler.release>11</maven.compiler.release>
+        <lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -195,6 +197,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- maven.compiler.release>1.8</maven.compiler.release -->
+        <lib-cxf-version>3.2.7</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -267,6 +270,7 @@
         <!-- maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target -->
         <maven.compiler.release>11</maven.compiler.release>
+        <lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -336,6 +340,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- maven.compiler.release>1.8</maven.compiler.release -->
+        <lib-cxf-version>3.2.7</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -407,6 +412,7 @@
         <!-- maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target -->
         <maven.compiler.release>11</maven.compiler.release>
+        <lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version>
       </properties>
       <build>
         <plugins>

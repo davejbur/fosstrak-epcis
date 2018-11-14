@@ -20,7 +20,7 @@
     <!-- original -->
     <!-- lib-cxf-version>2.2.9</lib-cxf-version -->
     <!-- works -->
-    <lib-cxf-version>2.2.12</lib-cxf-version>
+    <!-- lib-cxf-version>2.2.12</lib-cxf-version -->
     <!-- doesn't work -->
     <!-- lib-cxf-version>2.3.0</lib-cxf-version -->
     <!-- tried -->
@@ -33,24 +33,32 @@
     <!-- lib-cxf-version>3.0.16</lib-cxf-version -->
     <!-- doesn't work -->
     <!-- lib-cxf-version>3.2.4</lib-cxf-version -->
+    <!-- trying -->
+    <!-- lib-cxf-version>3.2.7</lib-cxf-version -->
+    <!-- trying -->
+    <!-- lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version -->
 
     <!-- original -->
     <!-- lib-spring-version>2.5.1</lib-spring-version -->
     <!-- works -->
     <!-- spring-version>2.5.6</lib-spring-version -->
     <!-- works -->
-    <lib-spring-version>3.2.18.RELEASE</lib-spring-version>
+    <!-- lib-spring-version>3.2.18.RELEASE</lib-spring-version -->
     <!-- trying -->
     <!-- lib-spring-version>4.3.14.RELEASE</lib-spring-version -->
     <!-- doesn't work -->
     <!-- lib-spring-version>5.0.4.RELEASE</lib-spring-version -->
+    <!-- trying -->
+    <lib-spring-version>5.1.2.RELEASE</lib-spring-version>
 
     <!-- original -->
     <!-- lib-hibernate-version>3.2.5.ga</lib-hibernate-version -->
     <!-- works -->
-    <lib-hibernate-version>3.6.10.Final</lib-hibernate-version>
+    <!-- lib-hibernate-version>3.6.10.Final</lib-hibernate-version -->
     <!-- tried -->
     <!-- lib-hibernate-version>4.3.11.Final</lib-hibernate-version -->
+    <!-- trying -->
+    <lib-hibernate-version>5.3.7.Final</lib-hibernate-version>
 
   </properties>
 
@@ -115,9 +123,15 @@
       <artifactId>hibernate-core</artifactId>
       <version>${lib-hibernate-version}</version>
     </dependency>
-    <dependency>
+    <!-- deprecated -->
+    <!-- dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-ehcache</artifactId>
+      <version>${lib-hibernate-version}</version>
+    </dependency -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-jcache</artifactId>
       <version>${lib-hibernate-version}</version>
     </dependency>
     <dependency>
@@ -177,21 +191,24 @@
       <artifactId>cxf-rt-databinding-jaxb</artifactId>
       <version>${lib-cxf-version}</version>
     </dependency>
-    <dependency>
+    <!-- not since 2.7.18 -->
+    <!-- dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-core</artifactId>
       <version>${lib-cxf-version}</version>
-    </dependency>
-    <dependency>
+    </dependency -->
+    <!-- not since 2.5.11 -->
+    <!-- dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-common-utilities</artifactId>
       <version>${lib-cxf-version}</version>
-    </dependency>
-    <dependency>
+    </dependency -->
+    <!-- not since 2.7.18 -->
+    <!-- dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-api</artifactId>
       <version>${lib-cxf-version}</version>
-    </dependency>
+    </dependency -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-bindings-soap</artifactId>
@@ -279,6 +296,11 @@
       <artifactId>jaxb-core</artifactId>
       <version>2.3.0</version>
     </dependency -->
+    <dependency>
+      <groupId>org.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+      <version>3.6.1</version>
+    </dependency>
   </dependencies>
 
 
@@ -374,7 +396,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.1</version>
+        <version>3.0.0-M1</version>
         <configuration>
           <!-- systemProperties is deprecated, but the new systemPropertyVariables
                keeps coming up with file.encoding cannot be set as system property"
@@ -448,7 +470,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>2.22.1</version>
+        <version>3.0.0-M1</version>
       </plugin>
     </plugins>
   </reporting>
@@ -460,6 +482,16 @@
 
   <pluginRepositories>
     <!-- Unnecessary/non-existent repositories removed - use Maven settings -->
+    <!-- CXF version 3.3.0+ needed for JDK11 -->
+    <pluginRepository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>http://repository.apache.org/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>
   </pluginRepositories>
+
 
 </project>
