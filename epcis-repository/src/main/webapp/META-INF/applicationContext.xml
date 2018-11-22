@@ -17,9 +17,10 @@
 
   <!-- beans and configurations defined in the cxf jars -->
   <import resource="classpath:META-INF/cxf/cxf.xml" />
-  <!-- not needed 2.4.0 & newer -->
-  <!-- import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" / -->
-  <!-- import resource="classpath:META-INF/cxf/cxf-servlet.xml" / -->
+  <!-- not needed cxf 2.4.0 & newer -->
+  <!-- reverted back for cxf 2.2 -->
+  <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+  <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
   <context:annotation-config />
   
@@ -54,9 +55,10 @@
   -->
 
   <!-- Hibernate session factory -->
-  <!-- bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" -->
+  <!-- reverted 5 back to 3 for testing -->
+  <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
   <!-- bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" -->
-  <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+  <!-- bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" -->
     <!-- all Hibernate properties are configured in hibernate.cfg.xml -->
     <property name="configLocation" value="classpath:hibernate.cfg.xml" />
   </bean>

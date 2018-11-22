@@ -12,6 +12,7 @@ import javax.jws.soap.SOAPBinding;
  */
 
 @WebService(targetNamespace = "urn:epcglobal:epcis:wsdl:1", name = "EPCISServicePortType")
+//@WebService
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public interface EPCISServicePortType {
 

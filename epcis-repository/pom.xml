@@ -16,52 +16,6 @@
   <modelVersion>4.0.0</modelVersion>
   <name>epcis-repository</name>
 
-  <properties>
-    <!-- original -->
-    <!-- lib-cxf-version>2.2.9</lib-cxf-version -->
-    <!-- works -->
-    <!-- lib-cxf-version>2.2.12</lib-cxf-version -->
-    <!-- doesn't work -->
-    <!-- lib-cxf-version>2.3.0</lib-cxf-version -->
-    <!-- tried -->
-    <!-- lib-cxf-version>2.3.11</lib-cxf-version -->
-    <!-- doesn't work -->
-    <!-- lib-cxf-version>2.6.17</lib-cxf-version -->
-    <!-- doesn't work -->
-    <!-- lib-cxf-version>2.7.18</lib-cxf-version -->
-    <!-- doesn't work -->
-    <!-- lib-cxf-version>3.0.16</lib-cxf-version -->
-    <!-- doesn't work -->
-    <!-- lib-cxf-version>3.2.4</lib-cxf-version -->
-    <!-- trying -->
-    <!-- lib-cxf-version>3.2.7</lib-cxf-version -->
-    <!-- trying -->
-    <!-- lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version -->
-
-    <!-- original -->
-    <!-- lib-spring-version>2.5.1</lib-spring-version -->
-    <!-- works -->
-    <!-- spring-version>2.5.6</lib-spring-version -->
-    <!-- works -->
-    <!-- lib-spring-version>3.2.18.RELEASE</lib-spring-version -->
-    <!-- trying -->
-    <!-- lib-spring-version>4.3.14.RELEASE</lib-spring-version -->
-    <!-- doesn't work -->
-    <!-- lib-spring-version>5.0.4.RELEASE</lib-spring-version -->
-    <!-- trying -->
-    <lib-spring-version>5.1.2.RELEASE</lib-spring-version>
-
-    <!-- original -->
-    <!-- lib-hibernate-version>3.2.5.ga</lib-hibernate-version -->
-    <!-- works -->
-    <!-- lib-hibernate-version>3.6.10.Final</lib-hibernate-version -->
-    <!-- tried -->
-    <!-- lib-hibernate-version>4.3.11.Final</lib-hibernate-version -->
-    <!-- trying -->
-    <lib-hibernate-version>5.3.7.Final</lib-hibernate-version>
-
-  </properties>
-
   <!-- =========================================================== -->
   <!-- Dependencies                                                -->
   <!-- =========================================================== -->
@@ -113,27 +67,31 @@
         <version>1.1</version>
     </dependency>
     <!-- Hibernate dependencies -->
+    
     <!-- dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate</artifactId>
-      <version>3.2.5.ga</version>
+      <version>${lib-hibernate-version}</version>
     </dependency -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>${lib-hibernate-version}</version>
     </dependency>
+    
     <!-- deprecated -->
-    <!-- dependency>
+    <!-- reverted jcache back to ehcache for testing -->
+    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-ehcache</artifactId>
       <version>${lib-hibernate-version}</version>
-    </dependency -->
-    <dependency>
+    </dependency>
+    <!-- dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-jcache</artifactId>
       <version>${lib-hibernate-version}</version>
-    </dependency>
+    </dependency -->
+    
     <dependency>
       <groupId>org.javassist</groupId>
       <artifactId>javassist</artifactId>
@@ -214,11 +172,19 @@
       <artifactId>cxf-rt-bindings-soap</artifactId>
       <version>${lib-cxf-version}</version>
     </dependency>
+    
+    <!-- newer cxf stuff - reverted back for testing -->
     <!-- dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-core</artifactId>
       <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-features-logging</artifactId>
+      <version>${lib-cxf-version}</version>
     </dependency -->
+    
     <!-- test dependencies -->
     <!-- dependency>
       <groupId>junit</groupId>
@@ -300,6 +266,11 @@
       <groupId>org.ehcache</groupId>
       <artifactId>ehcache</artifactId>
       <version>3.6.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>jcache</artifactId>
+        <version>1.0.1</version>
     </dependency>
   </dependencies>
 

@@ -82,6 +82,7 @@ import org.fosstrak.epcis.utils.TimeParser;
 import org.apache.commons.collections4.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -136,6 +137,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     private String triggerConditionSeconds;
     private String triggerConditionMinutes;
 
+    @Autowired
     private ServletContext servletContext;
     private DataSource dataSource;
     private QueryOperationsBackend backend;

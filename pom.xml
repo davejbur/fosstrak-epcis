@@ -11,9 +11,60 @@
   <packaging>pom</packaging> <!-- aggregator projects require 'pom' as packaging -->
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- CXF 2.7 requires Spring 4.1 max. Spring 4.1 requires Hibernate 4.3 max. Hibernate 4.3 doesn't know about jcache...! -->
   <properties>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
     <project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+
+    <!-- original -->
+    <!-- lib-cxf-version>2.2.9</lib-cxf-version -->
+    <!-- works -->
+    <lib-cxf-version-jdk8>2.2.12</lib-cxf-version-jdk8>
+    <!-- doesn't work -->
+    <!-- lib-cxf-version>2.3.0</lib-cxf-version -->
+    <!-- tried -->
+    <!-- lib-cxf-version>2.3.11</lib-cxf-version -->
+    <!-- doesn't work -->
+    <!-- lib-cxf-version>2.6.17</lib-cxf-version -->
+    <!-- doesn't work -->
+    <!-- lib-cxf-version>2.7.18</lib-cxf-version -->
+    <!-- doesn't work -->
+    <!-- lib-cxf-version>3.0.16</lib-cxf-version -->
+    <!-- doesn't work -->
+    <!-- lib-cxf-version>3.2.4</lib-cxf-version -->
+    <!-- trying -->
+    <!-- lib-cxf-version>3.2.7</lib-cxf-version -->
+    <!-- trying -->
+    <!-- lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version -->
+    <!-- lib-cxf-version-jdk8>2.2.12</lib-cxf-version-jdk8 -->
+    <!-- lib-cxf-version-jdk8>2.7.18</lib-cxf-version-jdk8 -->
+    <!-- lib-cxf-version-jdk8>3.2.7</lib-cxf-version-jdk8 -->
+    <!-- lib-cxf-version-jdk8>3.3.0-SNAPSHOT</lib-cxf-version-jdk8 -->
+    <lib-cxf-version-jdk11>3.3.0-SNAPSHOT</lib-cxf-version-jdk11>
+
+    <!-- original -->
+    <!-- lib-spring-version>2.5.1</lib-spring-version -->
+    <!-- works -->
+    <!-- spring-version>2.5.6</lib-spring-version -->
+    <!-- works -->
+    <lib-spring-version>3.2.18.RELEASE</lib-spring-version>
+    <!-- trying -->
+    <!-- lib-spring-version>4.1.9.RELEASE</lib-spring-version -->
+    <!-- trying -->
+    <!-- lib-spring-version>4.3.14.RELEASE</lib-spring-version -->
+    <!-- doesn't work -->
+    <!-- lib-spring-version>5.0.4.RELEASE</lib-spring-version -->
+    <!-- trying -->
+    <!-- lib-spring-version>5.1.2.RELEASE</lib-spring-version -->
+
+    <!-- original -->
+    <!-- lib-hibernate-version>3.2.5.ga</lib-hibernate-version -->
+    <!-- works -->
+    <lib-hibernate-version>3.6.10.Final</lib-hibernate-version>
+    <!-- tried -->
+    <!-- lib-hibernate-version>4.3.11.Final</lib-hibernate-version -->
+    <!-- trying -->
+    <!-- lib-hibernate-version>5.3.7.Final</lib-hibernate-version -->
   </properties>
 
 
@@ -53,7 +104,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- maven.compiler.release>1.8</maven.compiler.release -->
-        <lib-cxf-version>3.2.7</lib-cxf-version>
+        <lib-cxf-version>${lib-cxf-version-jdk8}</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -126,7 +177,7 @@
         <!-- maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target -->
         <maven.compiler.release>11</maven.compiler.release>
-        <lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version>
+        <lib-cxf-version>${lib-cxf-version-jdk11}</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -197,7 +248,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- maven.compiler.release>1.8</maven.compiler.release -->
-        <lib-cxf-version>3.2.7</lib-cxf-version>
+        <lib-cxf-version>${lib-cxf-version-jdk8}</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -270,7 +321,7 @@
         <!-- maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target -->
         <maven.compiler.release>11</maven.compiler.release>
-        <lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version>
+        <lib-cxf-version>${lib-cxf-version-jdk11}</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -340,7 +391,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- maven.compiler.release>1.8</maven.compiler.release -->
-        <lib-cxf-version>3.2.7</lib-cxf-version>
+        <lib-cxf-version>${lib-cxf-version-jdk8}</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -412,7 +463,7 @@
         <!-- maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target -->
         <maven.compiler.release>11</maven.compiler.release>
-        <lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version>
+        <lib-cxf-version>${lib-cxf-version-jdk11}</lib-cxf-version>
       </properties>
       <build>
         <plugins>
@@ -477,6 +528,14 @@
 
   <repositories>
     <!-- Unnecessary/non-existent repositories removed - use Maven settings -->
+    <repository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>http://repository.apache.org/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
   </repositories>
 
 

@@ -332,9 +332,8 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
 
     private void setUpBus() {
         Bus bus = CXFBusFactory.getDefaultBus();
-        ClientOnlyHTTPTransportFactory httpTransport = new ClientOnlyHTTPTransportFactory();
-//        HTTPTransportFactory httpTransport = new HTTPTransportFactory();
-        // httpTransport = new ServletTransportFactory();
+//        ClientOnlyHTTPTransportFactory httpTransport = new ClientOnlyHTTPTransportFactory();
+        HTTPTransportFactory httpTransport = new HTTPTransportFactory();
 
         //FIX - setbus seems to have disappeared in CXF 3.0 with no documentation on where it's gone!
         httpTransport.setBus(bus);
@@ -343,9 +342,9 @@ public class QueryControlClient implements QueryControlInterface, X509TrustManag
                 "http://www.w3.org/2003/05/soap/bindings/HTTP/", "http://schemas.xmlsoap.org/wsdl/http/",
                 "http://cxf.apache.org/transports/http/configuration", "http://cxf.apache.org/bindings/xformat", });
         httpTransport.setTransportIds(transportIds);
-        httpTransport.registerWithBindingManager();
-//        httpTransport.register();
-        // httpTransport.register();
+
+        //removed in CXF 2.3
+//        httpTransport.registerWithBindingManager();
     }
 
     // X509TrustManager methods: Note that this client will trust any server

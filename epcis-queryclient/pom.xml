@@ -19,10 +19,14 @@
   <!-- problem here is that httptransport has changed -->
   <properties>
     <!-- original -->
-    <lib-cxf-version>2.2.12</lib-cxf-version>
+    <!-- lib-cxf-version>2.2.12</lib-cxf-version -->
     <!-- tried -->
     <!-- lib-cxf-version>2.3.11</lib-cxf-version -->
-    <!-- lib-cxf-version>2.7.18</lib-cxf-version -->
+    <!-- lib-cxf-version>2.4.10</lib-cxf-version -->
+    <!-- lib-cxf-version>2.5.11</lib-cxf-version -->
+    <!-- lib-cxf-version>2.6.1</lib-cxf-version -->
+    <!-- lib-cxf-version>2.6.17</lib-cxf-version -->
+    <lib-cxf-version>2.7.18</lib-cxf-version>
     <!-- lib-cxf-version>3.0.16</lib-cxf-version -->
     <!-- lib-cxf-version>3.2.7</lib-cxf-version -->
     <!-- trying -->
@@ -167,6 +171,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!--  not in cxf 3.0+ -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-api</artifactId>
@@ -196,6 +201,11 @@
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
       <version>1.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.neethi</groupId>
+      <artifactId>neethi</artifactId>
+      <version>3.1.1</version>
     </dependency>
   </dependencies>
 
