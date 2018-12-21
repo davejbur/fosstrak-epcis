@@ -36,14 +36,14 @@ import org.dbunit.ext.mysql.MySqlConnection;
 /**
  * This utility class provides helper methods to access and manipulate the
  * database required by the classes in the interop-test module.
- * 
+ *
  * @author Marco Steybe
  */
 public class FosstrakDatabaseHelper {
 
     /**
      * Extracts the current state of the database into a flat DBUnit XML file.
-     * 
+     *
      * @throws Exception
      *             If any errors occur connecting to the database, reading the
      *             database contents, or writing the XML file.
@@ -56,7 +56,7 @@ public class FosstrakDatabaseHelper {
 
     private static IDatabaseConnection getDatabaseConnection() throws ClassNotFoundException, SQLException,
             DatabaseUnitException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection jdbcConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/epcis?autoReconnect=true",
                 "epcis", "epcis");
         IDatabaseConnection connection = new MySqlConnection(jdbcConnection, "epcis");
@@ -65,7 +65,7 @@ public class FosstrakDatabaseHelper {
 
     /**
      * Extracts the XML DTD from the database schema.
-     * 
+     *
      * @throws Exception
      *             If any errors occur connecting to the database, reading the
      *             database contents, or writing the DTD file.
@@ -79,7 +79,7 @@ public class FosstrakDatabaseHelper {
         exportDatabase();
 //        extractXmlSchema();
     }
-    
+
     public static ITable getObjectEventByEpc(IDatabaseConnection connection, String epc) throws Exception {
         String sql = "SELECT event.eventTime, epc.epc FROM `event_objectevent_epcs` epc, `event_objectevent` event WHERE epc.event_id=event.id AND epc.epc='" + epc +"'";
         ITable table = connection.createQueryTable("SingleObjectEvent", sql);
