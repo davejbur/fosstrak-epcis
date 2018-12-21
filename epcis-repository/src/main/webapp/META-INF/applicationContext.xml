@@ -4,6 +4,7 @@
     xmlns:jaxws="http://cxf.apache.org/jaxws"
     xmlns:cxf="http://cxf.apache.org/core"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:soap="http://cxf.apache.org/bindings/soap"
     xsi:schemaLocation="
                         http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -11,6 +12,8 @@
                         http://www.springframework.org/schema/context/spring-context.xsd
                         http://cxf.apache.org/core
                         http://cxf.apache.org/schemas/core.xsd
+                        http://cxf.apache.org/bindings/soap
+                        http://cxf.apache.org/schemas/configuration/soap.xsd 
                         http://cxf.apache.org/jaxws
                         http://cxf.apache.org/schemas/jaxws.xsd
                         ">
@@ -18,8 +21,8 @@
   <!-- beans and configurations defined in the cxf jars -->
   <import resource="classpath:META-INF/cxf/cxf.xml" />
   <!-- not needed cxf 2.4.0 & newer -->
-  <!-- reverted back for cxf 2.2 -->
-  <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+  <!-- revert back for cxf 2.2 -->
+  <!-- import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" / -->
   <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
   <context:annotation-config />
@@ -55,10 +58,10 @@
   -->
 
   <!-- Hibernate session factory -->
-  <!-- reverted 5 back to 3 for testing -->
-  <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+  <!-- revert 5 back to 3 for testing -->
+  <!-- bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" -->
   <!-- bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" -->
-  <!-- bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" -->
+  <bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
     <!-- all Hibernate properties are configured in hibernate.cfg.xml -->
     <property name="configLocation" value="classpath:hibernate.cfg.xml" />
   </bean>
@@ -84,6 +87,7 @@
       <bean class="org.fosstrak.epcis.repository.query.QueryOperationsBackendSQL" />
     </property>
   </bean>
+  
   <bean id="queryOperationsWebService" class="org.fosstrak.epcis.repository.query.QueryOperationsWebService">
     <constructor-arg><ref bean="queryOperationsModule" /></constructor-arg>
   </bean>
@@ -113,11 +117,13 @@
   <!-- =========================================================== -->
 
   <!-- publish the Web service endpoint and its implementing bean -->
-  <jaxws:endpoint id="EpcisQueryEndpoint" implementor="#queryOperationsWebService" address="/" />
+  <!-- jaxws:endpoint id="EpcisQueryEndpoint" implementor="#queryOperationsWebService" address="/" / -->
+  <jaxws:endpoint id="EpcisQueryEndpoint" implementor="#queryOperationsWebService" address="/" serviceName="EPCglobalEPCISService" />
   <jaxws:endpoint id="EpcisQueryLocalEndpoint" implementor="#queryOperationsWebService" address="local://query" />
   
   <!-- register local transport -->
-  <bean class="org.apache.cxf.transport.local.LocalTransportFactory" lazy-init="false">
+  <!-- This is the culprit!!! removing this section suddenly makes it work under CXF >2.2.12!!! -->
+  <!-- bean class="org.apache.cxf.transport.local.LocalTransportFactory" lazy-init="false">
     <property name="transportIds">
       <list>
         <value>http://cxf.apache.org/transports/local</value>
@@ -125,7 +131,7 @@
         <value>http://schemas.xmlsoap.org/wsdl/soap/http</value>
       </list>
     </property>
-  </bean>
+  </bean -->
 
   <!-- configure logging of SOAP messages -->
   <cxf:bus>

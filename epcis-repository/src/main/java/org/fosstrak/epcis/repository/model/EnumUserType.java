@@ -9,9 +9,9 @@ import java.util.Properties;
 
 import org.hibernate.HibernateException;
 
-//newer hibernate versions - reverted back for testing
-//import org.hibernate.engine.spi.SharedSessionContractImplementor;
-//import org.hibernate.engine.spi.SessionImplementor;
+//newer hibernate versions - revert back for testing
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.engine.spi.SessionImplementor;
 
 import org.hibernate.usertype.EnhancedUserType;
 import org.hibernate.usertype.ParameterizedType;
@@ -97,7 +97,7 @@ public class EnumUserType implements EnhancedUserType, ParameterizedType {
         return ((Enum) value).name();
     }
 
-  //newer hibernate versions - reverted back for testing
+  //newer hibernate versions - revert back for testing
     public Object nullSafeGet(ResultSet rs, String[] names, Object owner) throws HibernateException, SQLException {
         String name = rs.getString(names[0]);
         return rs.wasNull() ? null : Enum.valueOf(enumClass, name);
@@ -111,7 +111,7 @@ public class EnumUserType implements EnhancedUserType, ParameterizedType {
         }
     }
 
-/*  @Override
+  @Override
   public Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor ssci, Object owner) throws HibernateException, SQLException
   {
     String name = rs.getString(names[0]);
@@ -127,7 +127,7 @@ public class EnumUserType implements EnhancedUserType, ParameterizedType {
         st.setString(index, ((Enum) value).name());
     }
   }
-*/
+
 /*
   @Override
   public Object nullSafeGet(ResultSet rs, String[] strings, SessionImplementor si, Object o) throws HibernateException, SQLException

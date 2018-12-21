@@ -20,13 +20,13 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
     <property name="hibernate.cache.use_second_level_cache">true</property>
     <property name="hibernate.cache.use_query_cache">false</property>
 
-    <!-- reverted jcache back to ehcache for testing -->
-    <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+    <!-- revert jcache back to ehcache for testing -->
+    <!-- property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property -->
     <!-- added for hibernate4+ -->
     <!-- property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property -->
-    <!-- property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>
+    <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>
     <property name="hibernate.cache.region.factory_class">org.hibernate.cache.jcache.JCacheRegionFactory</property>
-    <property name="hibernate.javax.cache.missing_cache_strategy">create</property -->
+    <property name="hibernate.javax.cache.missing_cache_strategy">create</property>
 
     <property name="hibernate.cache.use_structured_entries">true</property>
     <property name="hibernate.jdbc.use_get_generated_keys">true</property>

@@ -199,6 +199,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      */
     private List<SimpleEventQueryDTO> constructSimpleEventQueries(final QueryParams queryParams) throws SQLException,
             QueryParameterExceptionResponse {
+        LOG.debug("Doing constructSimpleEventQueries...");
         SimpleEventQueryDTO aggrEventQuery = new SimpleEventQueryDTO(EpcisConstants.AGGREGATION_EVENT);
         SimpleEventQueryDTO objEventQuery = new SimpleEventQueryDTO(EpcisConstants.OBJECT_EVENT);
         SimpleEventQueryDTO quantEventQuery = new SimpleEventQueryDTO(EpcisConstants.QUANTITY_EVENT);
@@ -570,6 +571,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      * string.
      */
     private EventQueryParam parseExtensionField(String eventFieldExtBase, String paramName, Object paramValue) {
+        LOG.debug("Doing EventQueryParam...");
         Operation op = Operation.valueOf(paramName.substring(0, 2));
         String eventField;
         Object value;
@@ -623,6 +625,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      */
     private void checkEventTypes(List<String> eventTypes) throws QueryParameterExceptionResponse {
         for (String eventType : eventTypes) {
+        LOG.debug("Doing checkEventTypes...");
             if (!EpcisConstants.EVENT_TYPES.contains(eventType)) {
                 String msg = "Unsupported eventType: " + eventType;
                 throw queryParameterException(msg, null);
@@ -638,6 +641,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      * @return The Float holding the value of the query parameter.
      */
     private String parseAsString(Object queryParamValue) throws ClassCastException {
+        LOG.debug("Doing parseAsString...");
         if (queryParamValue instanceof String) {
             return (String) queryParamValue;
         } else if (queryParamValue instanceof Element) {
@@ -658,6 +662,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      *             If the query parameter value cannot be parsed as Float.
      */
     private Float parseAsFloat(Object queryParamValue) throws NumberFormatException {
+        LOG.debug("Doing parseAsFloat...");
         if (queryParamValue instanceof Float) {
             return (Float) queryParamValue;
         } else if (queryParamValue instanceof Element) {
@@ -681,6 +686,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      */
     private Calendar parseAsCalendar(Object queryParamValue, String queryParamName)
             throws QueryParameterExceptionResponse {
+        LOG.debug("Doing parseAsCalendar...");
         Calendar cal;
         if (queryParamValue instanceof Calendar) {
             // Axis returns a Calendar instance
@@ -723,6 +729,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      *             If the query parameter value cannot be parsed as Integer.
      */
     private Integer parseAsInteger(Object queryParamValue) throws NumberFormatException {
+        LOG.debug("Doing parseAsInteger...");
         if (queryParamValue instanceof Integer) {
             return (Integer) queryParamValue;
         } else if (queryParamValue instanceof Element) {
@@ -751,6 +758,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      */
     private ArrayOfString parseAsArrayOfString(Object queryParamValue) throws ClassCastException,
             QueryParameterExceptionResponse {
+        LOG.debug("Doing parseAsArrayOfString...");
         try {
             return (ArrayOfString) queryParamValue;
         } catch (ClassCastException e) {
@@ -794,6 +802,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      */
     private MasterDataQueryDTO constructMasterDataQuery(final QueryParams queryParams)
             throws QueryParameterExceptionResponse {
+        LOG.debug("Doing constructMasterDataQuery...");
         MasterDataQueryDTO mdQuery = new MasterDataQueryDTO();
 
         // a sorted List of query parameter names - keeps track of the processed
@@ -939,6 +948,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      *             If one of the action values are invalid.
      */
     private void checkActionValues(final List<String> actions) throws QueryParameterExceptionResponse {
+        LOG.debug("Doing checkActionValues...");
         for (String action : actions) {
             if (!(action.equalsIgnoreCase("ADD") || action.equalsIgnoreCase("OBSERVE") || action.equalsIgnoreCase("DELETE"))) {
                 String msg = "Invalid value for parameter EQ_action: " + action
@@ -955,6 +965,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      *            The map with the subscriptions.
      */
     private void saveSubscriptions(final Map<String, QuerySubscriptionScheduled> subscriptions) {
+        LOG.debug("Doing saveSubscriptions...");
         servletContext.setAttribute("subscribedMap", subscriptions);
     }
 
@@ -1006,6 +1017,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
     @Override
     public List<String> getSubscriptionIDs(String queryName) throws NoSuchNameExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, ImplementationExceptionResponse {
+        LOG.debug("Doing getSubscriptionIDs...");
         try {
             LOG.info("Invoking 'getSubscriptionIDs'");
             QueryOperationsSession session = null;
@@ -1124,6 +1136,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      */
     private EventListType checkOrdering(EventListType eventList, String orderBy, OrderDirection orderDirection,
             int limit) {
+        LOG.debug("Doing checkOrdering...");
         if (orderBy == null) {
             // no ordering specified
             return eventList;
@@ -1361,6 +1374,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      * @return the dataSource
      */
     public DataSource getDataSource() {
+        LOG.debug("Doing getDataSource...");
         return dataSource;
     }
 
@@ -1369,6 +1383,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      *            the dataSource to set
      */
     public void setDataSource(DataSource dataSource) {
+        LOG.debug("Doing setDataSource...");
         this.dataSource = dataSource;
     }
 
@@ -1437,6 +1452,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      *            the servletContextservletContext to set
      */
     public void setServletContext(ServletContext servletContext) {
+        LOG.debug("Doing setServletContext...");
         this.servletContext = servletContext;
     }
 
@@ -1467,6 +1483,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      * @return the backend
      */
     public QueryOperationsBackend getBackend() {
+        LOG.debug("Doing getBackend...");
         return backend;
     }
 
@@ -1475,6 +1492,7 @@ public class QueryOperationsModule implements EpcisQueryControlInterface {
      *            the backend to set
      */
     public void setBackend(QueryOperationsBackend backend) {
+        LOG.debug("Doing setBackend...");
         this.backend = backend;
     }
 

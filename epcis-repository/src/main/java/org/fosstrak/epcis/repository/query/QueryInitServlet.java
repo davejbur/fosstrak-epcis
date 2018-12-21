@@ -39,10 +39,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.cxf.BusFactory;
 
-//newer cxf versions - reverted back for testing
-//import org.apache.cxf.ext.logging.*;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
+//newer cxf versions - revert back for testing
+import org.apache.cxf.ext.logging.*;
+//import org.apache.cxf.interceptor.LoggingInInterceptor;
+//import org.apache.cxf.interceptor.LoggingOutInterceptor;
 
 import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
 
@@ -80,9 +80,9 @@ public class QueryInitServlet extends CXFNonSpringServlet {
      * @see org.apache.cxf.transport.servlet.CXFNonSpringServlet#loadBus(javax.servlet.ServletConfig)
      */
     @Override
-    //reverted back for testing
-    public void loadBus(ServletConfig servletConfig) throws ServletException {
-//    public void loadBus(ServletConfig servletConfig) {
+    //revert back for testing
+//    public void loadBus(ServletConfig servletConfig) throws ServletException {
+    public void loadBus(ServletConfig servletConfig) {
         LOG.debug("Running QueryInitServlet loadbus: super...");
         super.loadBus(servletConfig);
         LOG.debug("...setdefaultbus...");

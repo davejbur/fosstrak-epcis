@@ -22,7 +22,7 @@ package org.fosstrak.epcis.repository.query;
 
 //import javax.jws.WebService;
 //import javax.jws.WebMethod;
-//import javax.jws.WebService;
+import javax.jws.WebService;
 import org.fosstrak.epcis.model.ArrayOfString;
 import org.fosstrak.epcis.model.EmptyParms;
 import org.fosstrak.epcis.model.GetSubscriptionIDs;
@@ -62,6 +62,8 @@ import org.apache.commons.logging.LogFactory;
 //@WebService(endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType" /*, portName="EPCISServicePortType"*/, serviceName="QueryOperationsWebService")
 //@WebService(endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType", portName="EPCglobalEPCISServicePort", serviceName="EPCglobalEPCISService")
 //@WebService
+//@WebService(serviceName="EPCglobalEPCISService", portName="EPCglobalEPCISServicePort", targetNamespace="urn:epcglobal:epcis:wsdl:1", endpointInterface = "epcglobal.epcis.wsdl._1.EPCISServicePortType")
+//@WebService(serviceName="EPCglobalEPCISService", portName="EPCglobalEPCISServicePort", targetNamespace="urn:epcglobal:epcis:wsdl:1", endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType")
 public class QueryOperationsWebService implements EPCISServicePortType {
 
     private static final Log LOG = LogFactory.getLog(QueryOperationsWebService.class);
@@ -69,9 +71,11 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     private EpcisQueryControlInterface queryModule;
 
     public QueryOperationsWebService() {
+        LOG.debug("Creating QueryOperationsWebService (no params)...");
     }
 
     public QueryOperationsWebService(EpcisQueryControlInterface queryModule) {
+        LOG.debug("Creating QueryOperationsWebService (with queryModule)...");
         this.queryModule = queryModule;
     }
 
@@ -239,6 +243,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
      * @return the queryModule
      */
     public EpcisQueryControlInterface getQueryModule() {
+        LOG.debug("Doing getQueryModule...");
         return queryModule;
     }
 
@@ -247,6 +252,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
      *            the queryModule to set
      */
     public void setQueryModule(EpcisQueryControlInterface queryModule) {
+        LOG.debug("Doing setQueryModule...");
         this.queryModule = queryModule;
     }
 
