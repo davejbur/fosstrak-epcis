@@ -30,7 +30,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.sql.DataSource;
 import javax.xml.ws.Endpoint;
 
@@ -38,12 +37,7 @@ import org.fosstrak.epcis.soap.EPCISServicePortType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.cxf.BusFactory;
-
-//newer cxf versions - revert back for testing
 import org.apache.cxf.ext.logging.*;
-//import org.apache.cxf.interceptor.LoggingInInterceptor;
-//import org.apache.cxf.interceptor.LoggingOutInterceptor;
-
 import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
 
 /**
@@ -80,21 +74,15 @@ public class QueryInitServlet extends CXFNonSpringServlet {
      * @see org.apache.cxf.transport.servlet.CXFNonSpringServlet#loadBus(javax.servlet.ServletConfig)
      */
     @Override
-    //revert back for testing
-//    public void loadBus(ServletConfig servletConfig) throws ServletException {
     public void loadBus(ServletConfig servletConfig) {
-        LOG.debug("Running QueryInitServlet loadbus: super...");
         super.loadBus(servletConfig);
-        LOG.debug("...setdefaultbus...");
         BusFactory.setDefaultBus(getBus());
-        LOG.debug("...logging...");
         if (LOG.isDebugEnabled()) {
             getBus().getInInterceptors().add(new LoggingInInterceptor());
             getBus().getOutInterceptors().add(new LoggingOutInterceptor());
             getBus().getOutFaultInterceptors().add(new LoggingOutInterceptor());
             getBus().getInFaultInterceptors().add(new LoggingInInterceptor());
         }
-        LOG.debug("...setupqueryoperationsmodule...");
         EPCISServicePortType service = setupQueryOperationsModule(servletConfig);
 
         LOG.debug("Publishing query operations module service at /query");

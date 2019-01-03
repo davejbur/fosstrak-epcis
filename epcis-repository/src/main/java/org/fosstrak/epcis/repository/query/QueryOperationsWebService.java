@@ -20,9 +20,6 @@
 
 package org.fosstrak.epcis.repository.query;
 
-//import javax.jws.WebService;
-//import javax.jws.WebMethod;
-import javax.jws.WebService;
 import org.fosstrak.epcis.model.ArrayOfString;
 import org.fosstrak.epcis.model.EmptyParms;
 import org.fosstrak.epcis.model.GetSubscriptionIDs;
@@ -49,7 +46,6 @@ import org.fosstrak.epcis.soap.SubscriptionControlsExceptionResponse;
 import org.fosstrak.epcis.soap.ValidationExceptionResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-//import org.springframework.stereotype.Service;
 
 /**
  * This class redirects the calls received from the Web service stack to the
@@ -58,12 +54,6 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Marco Steybe
  */
-//@Service("EPCISServicePortType")
-//@WebService(endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType" /*, portName="EPCISServicePortType"*/, serviceName="QueryOperationsWebService")
-//@WebService(endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType", portName="EPCglobalEPCISServicePort", serviceName="EPCglobalEPCISService")
-//@WebService
-//@WebService(serviceName="EPCglobalEPCISService", portName="EPCglobalEPCISServicePort", targetNamespace="urn:epcglobal:epcis:wsdl:1", endpointInterface = "epcglobal.epcis.wsdl._1.EPCISServicePortType")
-//@WebService(serviceName="EPCglobalEPCISService", portName="EPCglobalEPCISServicePort", targetNamespace="urn:epcglobal:epcis:wsdl:1", endpointInterface="org.fosstrak.epcis.soap.EPCISServicePortType")
 public class QueryOperationsWebService implements EPCISServicePortType {
 
     private static final Log LOG = LogFactory.getLog(QueryOperationsWebService.class);
@@ -71,19 +61,16 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     private EpcisQueryControlInterface queryModule;
 
     public QueryOperationsWebService() {
-        LOG.debug("Creating QueryOperationsWebService (no params)...");
     }
 
     public QueryOperationsWebService(EpcisQueryControlInterface queryModule) {
-        LOG.debug("Creating QueryOperationsWebService (with queryModule)...");
         this.queryModule = queryModule;
     }
 
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getQueryNames(org.fosstrak.epcis.model.EmptyParms)
      */
-//    @WebMethod
-//    @Override
+    @Override
     public ArrayOfString getQueryNames(EmptyParms empty) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse {
         ArrayOfString aos = new ArrayOfString();
@@ -94,8 +81,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getStandardVersion(org.fosstrak.epcis.model.EmptyParms)
      */
-//    @WebMethod
-//    @Override
+    @Override
     public String getStandardVersion(EmptyParms empty) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse {
         return queryModule.getStandardVersion();
@@ -104,8 +90,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getSubscriptionIDs(org.fosstrak.epcis.model.GetSubscriptionIDs)
      */
-//    @WebMethod
-//    @Override
+    @Override
     public ArrayOfString getSubscriptionIDs(GetSubscriptionIDs req) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, NoSuchNameExceptionResponse {
         ArrayOfString aos = new ArrayOfString();
@@ -116,8 +101,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#getVendorVersion(org.fosstrak.epcis.model.EmptyParms)
      */
-//    @WebMethod
-//    @Override
+    @Override
     public String getVendorVersion(EmptyParms empty) throws ImplementationExceptionResponse, SecurityExceptionResponse,
             ValidationExceptionResponse {
         return queryModule.getVendorVersion();
@@ -126,8 +110,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#poll(org.fosstrak.epcis.model.Poll)
      */
-//    @WebMethod
-//    @Override
+    @Override
     public QueryResults poll(Poll poll) throws ImplementationExceptionResponse, QueryTooComplexExceptionResponse,
             QueryTooLargeExceptionResponse, SecurityExceptionResponse, ValidationExceptionResponse,
             NoSuchNameExceptionResponse, QueryParameterExceptionResponse {
@@ -164,8 +147,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#subscribe(org.fosstrak.epcis.model.Subscribe)
      */
-//    @WebMethod
-//    @Override
+    @Override
     public VoidHolder subscribe(Subscribe subscribe) throws DuplicateSubscriptionExceptionResponse,
             ImplementationExceptionResponse, QueryTooComplexExceptionResponse, SecurityExceptionResponse,
             InvalidURIExceptionResponse, ValidationExceptionResponse, SubscribeNotPermittedExceptionResponse,
@@ -212,8 +194,7 @@ public class QueryOperationsWebService implements EPCISServicePortType {
     /**
      * @see org.fosstrak.epcis.soap.EPCISServicePortType#unsubscribe(org.fosstrak.epcis.model.Unsubscribe)
      */
-//    @WebMethod
-//    @Override
+    @Override
     public VoidHolder unsubscribe(Unsubscribe unsubscribe) throws ImplementationExceptionResponse,
             SecurityExceptionResponse, ValidationExceptionResponse, NoSuchSubscriptionExceptionResponse {
         // log and wrap any error that is not one of the expected exceptions
@@ -243,7 +224,6 @@ public class QueryOperationsWebService implements EPCISServicePortType {
      * @return the queryModule
      */
     public EpcisQueryControlInterface getQueryModule() {
-        LOG.debug("Doing getQueryModule...");
         return queryModule;
     }
 
@@ -252,7 +232,6 @@ public class QueryOperationsWebService implements EPCISServicePortType {
      *            the queryModule to set
      */
     public void setQueryModule(EpcisQueryControlInterface queryModule) {
-        LOG.debug("Doing setQueryModule...");
         this.queryModule = queryModule;
     }
 

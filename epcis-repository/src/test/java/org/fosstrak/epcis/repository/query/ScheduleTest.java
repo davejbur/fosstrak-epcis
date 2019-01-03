@@ -23,13 +23,13 @@ package org.fosstrak.epcis.repository.query;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 import org.fosstrak.epcis.model.ImplementationException;
 import org.fosstrak.epcis.model.QuerySchedule;
 import org.fosstrak.epcis.model.SubscriptionControlsException;
 import org.fosstrak.epcis.soap.ImplementationExceptionResponse;
 import org.fosstrak.epcis.soap.SubscriptionControlsExceptionResponse;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.*;
 
 /**
  * Tests for class Schedule.

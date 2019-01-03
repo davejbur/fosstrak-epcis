@@ -50,22 +50,16 @@
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
-    <!-- dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.3.1</version>
+      <version>5.4.0-M1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.3.1</version>
+      <version>5.4.0-M1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -106,7 +100,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M1</version>
+        <version>3.0.0-M3</version>
         <configuration>
           <!-- by default, exclude all tests (see note above) -->
           <excludes>

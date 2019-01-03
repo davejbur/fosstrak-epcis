@@ -16,23 +16,6 @@
   <modelVersion>4.0.0</modelVersion>
   <name>epcis-queryclient</name>
 
-  <!-- problem here is that httptransport has changed -->
-  <properties>
-    <!-- original -->
-    <!-- lib-cxf-version>2.2.12</lib-cxf-version -->
-    <!-- tried -->
-    <!-- lib-cxf-version>2.3.11</lib-cxf-version -->
-    <!-- lib-cxf-version>2.4.10</lib-cxf-version -->
-    <!-- lib-cxf-version>2.5.11</lib-cxf-version -->
-    <!-- lib-cxf-version>2.6.1</lib-cxf-version -->
-    <!-- lib-cxf-version>2.6.17</lib-cxf-version -->
-    <lib-cxf-version>2.7.18</lib-cxf-version>
-    <!-- lib-cxf-version>3.0.16</lib-cxf-version -->
-    <!-- lib-cxf-version>3.2.7</lib-cxf-version -->
-    <!-- trying -->
-    <!-- lib-cxf-version>3.3.0-SNAPSHOT</lib-cxf-version -->
-  </properties>
-
   <!-- CXF version 3.3.0+ needed for JDK11 -->
   <pluginRepositories>
     <pluginRepository>
@@ -78,10 +61,6 @@
         <exclusion>
           <groupId>velocity</groupId>
           <artifactId>velocity</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.neethi</groupId>
-          <artifactId>neethi</artifactId>
         </exclusion>
         <exclusion>
           <groupId>asm</groupId>
@@ -134,78 +113,13 @@
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-databinding-jaxb</artifactId>
-      <version>${lib-cxf-version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.apache.geronimo.specs</groupId>
-          <artifactId>geronimo-javamail_1.4_spec</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.apache.geronimo.specs</groupId>
-          <artifactId>geronimo-activation_1.1_spec</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.sun.xml.bind</groupId>
-          <artifactId>jaxb-xjc</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>velocity</groupId>
-          <artifactId>velocity</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>asm</groupId>
-          <artifactId>asm</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-core</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-beans</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-context</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <!--  not in cxf 3.0+ -->
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-api</artifactId>
+      <artifactId>cxf-core</artifactId>
       <version>${lib-cxf-version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-core</artifactId>
-      <version>${lib-cxf-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.geronimo.specs</groupId>
-      <artifactId>geronimo-jaxws_2.1_spec</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <!-- dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-      <version>2.2</version>
-    </dependency -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-frontend-simple</artifactId>
       <version>${lib-cxf-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.geronimo.specs</groupId>
-      <artifactId>geronimo-ws-metadata_2.0_spec</artifactId>
-      <version>1.1.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.neethi</groupId>
-      <artifactId>neethi</artifactId>
-      <version>3.1.1</version>
     </dependency>
   </dependencies>
 
@@ -225,7 +139,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.1.1</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -356,7 +270,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>3.0.0-M1</version>
+        <version>3.0.0-M3</version>
       </plugin>
     </plugins>
   </reporting>

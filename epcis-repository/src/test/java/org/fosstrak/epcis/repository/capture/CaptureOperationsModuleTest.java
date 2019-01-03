@@ -20,9 +20,9 @@
 
 package org.fosstrak.epcis.repository.capture;
 
-import org.fosstrak.epcis.repository.InvalidFormatException;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
+import org.fosstrak.epcis.repository.InvalidFormatException;
 
 /**
  * Tests some features of the CaptureOperationsModule class.

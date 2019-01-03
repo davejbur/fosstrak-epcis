@@ -116,6 +116,11 @@
       <artifactId>spring-core</artifactId>
       <version>${lib-spring-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+      <version>${lib-spring-version}</version>
+    </dependency>
     <!-- CXF dependencies -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
@@ -132,6 +137,48 @@
       <artifactId>cxf-rt-transports-local</artifactId>
       <version>${lib-cxf-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-databinding-jaxb</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-bindings-soap</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-bindings-xml</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-simple</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-management</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-ws-addr</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-wsdl</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-ws-policy</artifactId>
+      <version>${lib-cxf-version}</version>
+    </dependency>
+    
+    <!-- newer cxf stuff - revert back for testing -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-core</artifactId>
