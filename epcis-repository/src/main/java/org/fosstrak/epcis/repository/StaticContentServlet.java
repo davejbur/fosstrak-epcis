@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * This is a wrapper for the default Servlet which handles requests to
  * static content.
- * 
+ *
  * @author Marco Steybe
  */
 public class StaticContentServlet extends HttpServlet {
@@ -22,7 +22,7 @@ public class StaticContentServlet extends HttpServlet {
     private static final Log LOG = LogFactory.getLog(StaticContentServlet.class);
     private static final long serialVersionUID = 1L;
 
-    //FIX - this doesn't seem to work...!
+    //FIX - static content doesn't seem to work...!
     @Override
     public void doGet(final HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher rd = getServletContext().getNamedDispatcher("default");

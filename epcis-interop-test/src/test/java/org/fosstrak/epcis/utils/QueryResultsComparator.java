@@ -34,6 +34,8 @@ import org.custommonkey.xmlunit.DifferenceListener;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Utility class providing operations to compare QueryResults objects.
@@ -42,6 +44,7 @@ import org.w3c.dom.Node;
  */
 public final class QueryResultsComparator {
 
+    private static final Log LOG = LogFactory.getLog(QueryResultsComparator.class);
     static {
         XMLUnit.setNormalizeWhitespace(true);
     }
@@ -109,7 +112,7 @@ public final class QueryResultsComparator {
                     return controlCal.getTimeInMillis() == testCal.getTimeInMillis() ? RETURN_IGNORE_DIFFERENCE_NODES_IDENTICAL
                             : RETURN_ACCEPT_DIFFERENCE;
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    LOG.error("Exception: ",e);
                 }
             }
             return ignore.contains(difference) ? RETURN_IGNORE_DIFFERENCE_NODES_IDENTICAL : RETURN_ACCEPT_DIFFERENCE;

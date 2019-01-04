@@ -38,6 +38,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Test for 'reportIfEmpty' tag (SE48).
@@ -46,6 +48,7 @@ import org.xml.sax.SAXException;
  */
 public class CallbackReportIfEmptyTest extends TestCase {
 
+    private static final Log LOG = LogFactory.getLog(CallbackReportIfEmptyTest.class);
     private static final String PATH = "src/test/resources/queries/webservice/requests/";
     private static final String REQUEST_1 = "Test-EPCIS10-SE48-Request-1-Subscribe.xml";
     private static final String REQUEST_2 = "Test-EPCIS10-SE48-Request-2-Subscribe.xml";
@@ -76,7 +79,7 @@ public class CallbackReportIfEmptyTest extends TestCase {
             try {
                 listener.wait(15000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         }
         String resp1 = listener.fetchResponse();
@@ -103,7 +106,7 @@ public class CallbackReportIfEmptyTest extends TestCase {
             try {
                 listener.wait(15000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         }
         String resp2 = listener.fetchResponse();

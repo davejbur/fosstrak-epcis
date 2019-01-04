@@ -38,6 +38,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Test for unsubscribing queries (SE44).
@@ -46,6 +48,7 @@ import org.xml.sax.SAXException;
  */
 public class CallbackUnsubscribeTest extends TestCase {
 
+    private static final Log LOG = LogFactory.getLog(CallbackUnsubscribeTest.class);
     private static final String PATH = "src/test/resources/queries/webservice/requests/";
 
     private static QueryControlClient client = new QueryControlClient();
@@ -75,7 +78,7 @@ public class CallbackUnsubscribeTest extends TestCase {
             try {
                 listener.wait(15000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         }
         String resp1 = listener.fetchResponse();
@@ -93,7 +96,7 @@ public class CallbackUnsubscribeTest extends TestCase {
             try {
                 listener.wait(15000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         }
         String resp2 = listener.fetchResponse();

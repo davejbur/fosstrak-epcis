@@ -29,8 +29,11 @@ import org.fosstrak.epcis.captureclient.CaptureClient;
 import org.fosstrak.epcis.queryclient.QueryControlClient;
 import org.fosstrak.epcis.soap.NoSuchSubscriptionExceptionResponse;
 import org.fosstrak.epcis.utils.QueryCallbackListener;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class CallbackTriggerTest extends TestCase {
+    private static final Log LOG = LogFactory.getLog(CallbackTriggerTest.class);
     private static final String PATH = "src/test/resources/queries/webservice/";
 
     private static QueryControlClient client = new QueryControlClient();
@@ -61,7 +64,7 @@ public class CallbackTriggerTest extends TestCase {
             try {
                 listener.wait(60 * 1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         }
         String resp = listener.fetchResponse();
@@ -129,10 +132,10 @@ public class CallbackTriggerTest extends TestCase {
                 sleep(10000);
                 client.capture(event.toString());
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         }
     }

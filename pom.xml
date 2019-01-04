@@ -503,6 +503,33 @@
       <filter>${filter.file}</filter>
     </filters>
     <plugins>
+      <!-- checking for updated plugins gives the message:
+            Project does not define required minimum version of Maven.
+            Update the pom.xml to contain maven-enforcer-plugin to
+            force the maven version which is needed to build this project.
+            See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
+            Using the minimum version of Maven: 3.0       
+          The suggestion on the referenced web page is to add the plugin below. However, this does not seem to change anything! -->
+      <!-- plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.0.0-M2</version>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.0</version>
+                </requireMavenVersion>
+              </rules>    
+            </configuration>
+          </execution>
+        </executions>
+      </plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -600,6 +627,32 @@
       </plugins>
     </pluginManagement>
   </build>
+  <dependencies>
+    <!-- required for JDK11 -->
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.4.0-b180830.0359</version>
+    </dependency>
+    <!-- required for JDK11 -->
+    <dependency>
+      <groupId>javax.xml.ws</groupId>
+      <artifactId>jaxws-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <!-- required for JDK11 -->
+    <dependency>
+      <groupId>org.glassfish.metro</groupId>
+      <artifactId>webservices-api</artifactId>
+      <version>2.4.2</version>
+    </dependency>
+    <!-- required for JDK11 -->
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>2.4.0-b180830.0438</version>
+    </dependency>
+  </dependencies>
 
 
   <!-- =========================================================== -->

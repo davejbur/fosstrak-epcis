@@ -83,6 +83,8 @@ import org.fosstrak.epcis.model.SubscriptionControls;
 import org.fosstrak.epcis.model.TransactionEventType;
 import org.fosstrak.epcis.queryclient.QueryClientHelper.ExampleQueries;
 import org.fosstrak.epcis.utils.TimeParser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Implements the GUI part of the EPCIS Query Interface client.
@@ -90,6 +92,8 @@ import org.fosstrak.epcis.utils.TimeParser;
  * @author David Gubler
  */
 public class QueryClientGui extends WindowAdapter implements ActionListener, AuthenticationOptionsChangeListener {
+
+    private static final Log LOG = LogFactory.getLog(QueryClientGui.class);
 
     /**
      * The enumeration of all possible query parameter types.
@@ -1807,13 +1811,13 @@ public class QueryClientGui extends WindowAdapter implements ActionListener, Aut
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception: ",e);
         }
         if (args != null && args.length > 0) {
             try {
                 new QueryClientGui(args[0]);
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         } else {
             new QueryClientGui();

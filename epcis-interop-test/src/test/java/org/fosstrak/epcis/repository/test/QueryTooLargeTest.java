@@ -27,17 +27,20 @@ import org.dbunit.operation.DatabaseOperation;
 import org.fosstrak.epcis.queryclient.QueryControlClient;
 import org.fosstrak.epcis.soap.QueryTooLargeExceptionResponse;
 import org.fosstrak.epcis.utils.QueryCallbackListener;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Tests for QueryTooLargeException (SE50, SE68). TODO: this cannot yet be
  * tested automatically, idea: need a repository running with a number of x
  * events in the database and the application property 'maxQueryResultRows' set
  * to less than x.
- * 
+ *
  * @author Marco Steybe
  */
 public class QueryTooLargeTest extends FosstrakInteropTestCase {
 
+  private static final Log LOG = LogFactory.getLog(QueryTooLargeTest.class);
 	private static final String PATH = "src/test/resources/queries/webservice/requests/";
     private static final String DEFAULT_QUERY_URL = "http://localhost:8080/epcis-repository/query";
 
@@ -50,7 +53,7 @@ public class QueryTooLargeTest extends FosstrakInteropTestCase {
 
 	/**
 	 * Tests if QueryTooLargeException is raised.
-	 * 
+	 *
 	 * @throws Exception
 	 *             Any exception, caught by the JUnit framework.
 	 */
@@ -69,7 +72,7 @@ public class QueryTooLargeTest extends FosstrakInteropTestCase {
 
 	/**
 	 * Tests if QueryTooLargeException is raised (callback).
-	 * 
+	 *
 	 * @throws Exception
 	 *             Any exception, caught by the JUnit framework.
 	 */
@@ -90,7 +93,7 @@ public class QueryTooLargeTest extends FosstrakInteropTestCase {
 			try {
 				listener.wait(60000);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				LOG.error("Exception: ",e);
 			}
 		}
 		String resp = listener.fetchResponse();

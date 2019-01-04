@@ -34,12 +34,15 @@ import org.fosstrak.epcis.model.ImplementationException;
 import org.fosstrak.epcis.model.QueryResults;
 import org.fosstrak.epcis.model.QueryTooLargeException;
 import org.fosstrak.epcis.utils.QueryResultsParser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Marco Steybe
  */
 public class QueryCallbackClient extends HttpServlet implements QueryCallbackInterface {
 
+    private static final Log LOG = LogFactory.getLog(QueryCallbackClient.class);
     private static final long serialVersionUID = 6250815925403597265L;
     private static String callbackResults = null;
 
@@ -55,7 +58,7 @@ public class QueryCallbackClient extends HttpServlet implements QueryCallbackInt
             result = QueryResultsParser.parseResults(is);
         } catch (IOException e) {
             // TODO auto-generated catch block
-            e.printStackTrace();
+            LOG.error("Exception: ",e);
         }
     }
 

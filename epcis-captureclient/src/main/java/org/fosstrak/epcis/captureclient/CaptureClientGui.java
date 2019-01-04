@@ -73,6 +73,8 @@ import org.fosstrak.epcis.gui.AuthenticationOptionsPanel;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * GUI class for the EPCIS Capture Interface Client. Implements the GUI and the
@@ -82,6 +84,7 @@ import org.w3c.dom.Element;
  */
 public class CaptureClientGui extends WindowAdapter implements ActionListener, AuthenticationOptionsChangeListener {
 
+    private static final Log LOG = LogFactory.getLog(CaptureClientGui.class);
     /**
      * The client through which the EPCISEvents will be sent to the repository's
      * Capture Operations Module.
@@ -967,7 +970,7 @@ public class CaptureClientGui extends WindowAdapter implements ActionListener, A
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception: ",e);
         }
         if (args != null && args.length > 0) {
             // a default url is given

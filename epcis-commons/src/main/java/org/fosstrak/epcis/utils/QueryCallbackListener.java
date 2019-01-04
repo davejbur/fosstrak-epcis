@@ -32,6 +32,8 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * This class implements a simple web server listening for responses from the
@@ -42,6 +44,8 @@ import java.nio.charset.CharsetDecoder;
  * @author Marco Steybe
  */
 public final class QueryCallbackListener extends Thread {
+
+    private static final Log LOG = LogFactory.getLog(QueryCallbackListener.class);
 
     private static final int PORT = 8899;
 
@@ -93,13 +97,13 @@ public final class QueryCallbackListener extends Thread {
             } catch (SocketException e) {
                 // server socket closed (stopRunning was called)
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             } finally {
                 if (client != null) {
                     try {
                         client.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LOG.error("Exception: ",e);
                     }
                 }
             }
@@ -201,7 +205,7 @@ public final class QueryCallbackListener extends Thread {
         try {
             server.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("Exception: ",e);
         }
     }
 

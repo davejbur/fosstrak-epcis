@@ -33,21 +33,24 @@ import org.fosstrak.epcis.soap.NoSuchSubscriptionExceptionResponse;
 import org.fosstrak.epcis.utils.QueryCallbackListener;
 import org.fosstrak.epcis.utils.QueryResultsComparator;
 import org.fosstrak.epcis.utils.QueryResultsParser;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Test for initialRecordTime (SE66).
- * 
+ *
  * @author Marco Steybe
  */
 public class CallbackRecordTimeTest extends TestCase {
 
+    private static final Log LOG = LogFactory.getLog(CallbackRecordTimeTest.class);
     private static final String PATH = "src/test/resources/queries/webservice/";
 
     private static QueryControlClient client = new QueryControlClient();
 
     /**
      * Tests if setting the initialRecordTime parameter has effect.
-     * 
+     *
      * @throws Exception
      *             Any exception, caught by the JUnit framework.
      */
@@ -69,7 +72,7 @@ public class CallbackRecordTimeTest extends TestCase {
             try {
                 listener.wait(15000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         }
         String resp1 = listener.fetchResponse();
@@ -98,7 +101,7 @@ public class CallbackRecordTimeTest extends TestCase {
             try {
                 listener.wait(15000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("Exception: ",e);
             }
         }
         String resp2 = listener.fetchResponse();
@@ -120,7 +123,7 @@ public class CallbackRecordTimeTest extends TestCase {
 
     /**
      * Clears all event data from the repository. {@inheritDoc}
-     * 
+     *
      * @see junit.framework.TestCase#tearDown()
      */
     @Override
